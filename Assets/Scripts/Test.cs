@@ -8,7 +8,7 @@ public class Test : MonoBehaviour
 
 	void Start()
 	{
-		const float speed		= 1;
+		const float speed		= 2;
 
 	    PlayerModel model				= new PlayerModel( speed );
 		PlayerController controller		= new PlayerController( model, _playerView );

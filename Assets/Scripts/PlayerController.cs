@@ -1,4 +1,5 @@
-﻿using UniRx;
+﻿using System;
+using UniRx;
 using UnityEngine;
 
 
@@ -9,6 +10,15 @@ public class PlayerController
 
 
 	bool	_right;
+	bool	_left;
+	bool	_up;
+	bool	_down;
+
+
+	Vector2Int Dir		=> new Vector2Int(
+											_right.ToInt() - _left.ToInt(),
+											_up.ToInt() - _down.ToInt()
+	);
 
 
 	public PlayerController( PlayerModel model, PlayerView view )
@@ -16,25 +26,37 @@ public class PlayerController
 		_view		= view;
 		_model		= model;
 
-		model.OnPositionChange		+= ModelOnOnPositionChange;
-
-
-		Observable.EveryUpdate()
-			.Where( _ => Input.GetKeyDown( KeyCode.D ) || Input.GetKeyUp( KeyCode.D ) )
-			.Select( _ => Input.GetKeyDown( KeyCode.D ) )
-			.Subscribe( x => _right = x )
-		;
+		BindKey( KeyCode.A, x => _left = x );
+		BindKey( KeyCode.D, x => _right = x );
+		BindKey( KeyCode.S, x => _down = x );
+		BindKey( KeyCode.W, x => _up = x );
 		
 		Observable.EveryUpdate()
-			.Where( _ => _right )
-			.Subscribe( _ => _model.Move( Vector2Int.right ) )
+			.Where( _ => Dir != Vector2Int.zero )
+			.Subscribe( _ => _model.Move( Dir ) )
 		;
+
+		model.OnPositionChange		+= OnPositionChange;
 	}
 
 
-	void ModelOnOnPositionChange( Vector2 pos )
+	void OnPositionChange( Vector2 pos )
 	{
 		_view.transform.position		= pos;
 	}
+
+
+	void BindKey( KeyCode keyCode, Action< bool > action )
+	=>
+		Observable.EveryUpdate()
+			.Where( _ =>
+				Input.GetKeyDown	( keyCode ) ||
+				Input.GetKeyUp		( keyCode )
+			)
+			.Select( _ =>
+				Input.GetKeyDown	( keyCode )
+			)
+			.Subscribe( action )
+		;
 }
 
