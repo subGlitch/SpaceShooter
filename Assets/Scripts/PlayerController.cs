@@ -1,5 +1,6 @@
 ﻿using System;
 using UniRx;
+using UniRx.Diagnostics;
 using UnityEngine;
 
 
@@ -8,15 +9,12 @@ public class PlayerController
 	PlayerView		_view;
 	PlayerModel		_model;
 
-	KeyState	_keyRight		= new KeyState( KeyCode.D );
-	KeyState	_keyLeft		= new KeyState( KeyCode.A );
-	KeyState	_keyUp			= new KeyState( KeyCode.W );
-	KeyState	_keyDown		= new KeyState( KeyCode.S );
+	DirKeyState		_keyRight		= new DirKeyState( KeyCode.D,	Vector2Int.right	);
+	DirKeyState		_keyLeft		= new DirKeyState( KeyCode.A,	Vector2Int.left		);
+	DirKeyState		_keyUp			= new DirKeyState( KeyCode.W,	Vector2Int.up		);
+	DirKeyState		_keyDown		= new DirKeyState( KeyCode.S,	Vector2Int.down		);
 
-	Vector2Int Dir		=> new Vector2Int(
-											_keyRight.ToInt - _keyLeft.ToInt,
-											_keyUp.ToInt - _keyDown.ToInt
-	);
+	Vector2Int		Dir				=> (Vector2Int) _keyRight + _keyLeft + _keyUp + _keyDown;
 
 
 	public PlayerController( PlayerModel model, PlayerView view )
