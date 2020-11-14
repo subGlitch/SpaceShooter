@@ -19,7 +19,7 @@ public class PlayerModel
 
 	public void Move( Vector2Int dir )
 	{
-		_position		+= (Vector2)dir * _speed;
+		_position		+= (Vector2)dir * _speed * Time.deltaTime;
 
 		OnPositionChange?.Invoke( _position );
 	}

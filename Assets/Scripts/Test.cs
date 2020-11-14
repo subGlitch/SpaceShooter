@@ -4,7 +4,6 @@
 public class Test : MonoBehaviour
 {
 	public PlayerView		_playerView;
-	public PlayerInputView	_playerInputView;
 
 
 	void Start()
@@ -12,7 +11,7 @@ public class Test : MonoBehaviour
 		const float speed		= 1;
 
 	    PlayerModel model				= new PlayerModel( speed );
-		PlayerController controller		= new PlayerController( model, _playerView, _playerInputView );
+		PlayerController controller		= new PlayerController( model, _playerView );
 	}
 }
 
