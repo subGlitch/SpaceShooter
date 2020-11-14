@@ -29,7 +29,7 @@ public class PlayerController
 			.Subscribe( _ => _model.Move( Dir ) )
 		;
 
-		model.OnPositionChange		+= OnPositionChange;
+		model.position.Subscribe( OnPositionChange );
 	}
 
 	

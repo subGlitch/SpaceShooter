@@ -1,14 +1,13 @@
-﻿using UnityEngine;
+﻿using UniRx;
+using UnityEngine;
 
 
 public class PlayerModel
 {
-	public delegate void PositionEvent( Vector2 pos );
-	public event PositionEvent OnPositionChange;
+	public readonly ReactiveProperty< Vector2 >		position		= new ReactiveProperty< Vector2 >();
 
 
-	Vector2		_position;
-	float		_speed;
+	float	_speed;
 
 
 	public PlayerModel( float speed )
@@ -19,9 +18,7 @@ public class PlayerModel
 
 	public void Move( Vector2Int dir )
 	{
-		_position		+= (Vector2)dir * _speed * Time.deltaTime;
-
-		OnPositionChange?.Invoke( _position );
+		position.Value		+= (Vector2)dir * _speed * Time.deltaTime;
 	}
 }
 
