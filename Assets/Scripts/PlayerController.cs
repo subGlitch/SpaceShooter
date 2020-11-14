@@ -1,6 +1,5 @@
 ﻿using System;
 using UniRx;
-using UniRx.Diagnostics;
 using UnityEngine;
 
 
@@ -9,11 +8,12 @@ public class PlayerController
 	PlayerView		_view;
 	PlayerModel		_model;
 
+
+	// Keyboard Controls
 	DirKeyState		_keyRight		= new DirKeyState( KeyCode.D,	Vector2Int.right	);
 	DirKeyState		_keyLeft		= new DirKeyState( KeyCode.A,	Vector2Int.left		);
 	DirKeyState		_keyUp			= new DirKeyState( KeyCode.W,	Vector2Int.up		);
 	DirKeyState		_keyDown		= new DirKeyState( KeyCode.S,	Vector2Int.down		);
-
 	Vector2Int		Dir				=> (Vector2Int) _keyRight + _keyLeft + _keyUp + _keyDown;
 
 
@@ -22,10 +22,7 @@ public class PlayerController
 		_view		= view;
 		_model		= model;
 
-		BindKey( _keyRight	);
-		BindKey( _keyLeft	);
-		BindKey( _keyUp		);
-		BindKey( _keyDown	);
+		BindKeys();
 		
 		Observable.EveryUpdate()
 			.Where( _ => Dir != Vector2Int.zero )
@@ -33,6 +30,15 @@ public class PlayerController
 		;
 
 		model.OnPositionChange		+= OnPositionChange;
+	}
+
+	
+	void BindKeys()
+	{
+		BindKey( _keyRight	);
+		BindKey( _keyLeft	);
+		BindKey( _keyUp		);
+		BindKey( _keyDown	);
 	}
 
 
