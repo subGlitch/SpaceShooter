@@ -22,14 +22,18 @@ public class PlayerController
 		_view		= view;
 		_model		= model;
 
+		// Player Control
 		BindKeys();
-		
 		Observable.EveryUpdate()
 			.Where( _ => Dir != Vector2Int.zero )
 			.Subscribe( _ => _model.Move( Dir ) )
 		;
 
-		model.position.Subscribe( OnPositionChange );
+		// View Refresh
+		model.position
+			.Subscribe( p => _view.transform.position = p )
+			.AddTo( _view )
+		;
 	}
 
 	
@@ -40,11 +44,6 @@ public class PlayerController
 		BindKey( _keyUp		);
 		BindKey( _keyDown	);
 	}
-
-
-	void OnPositionChange( Vector2 pos )
-	=>
-		_view.transform.position		= pos;
 
 
 	void BindKey( KeyState keyState )
