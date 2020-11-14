@@ -31,7 +31,7 @@ public class PlayerController
 
 		// View Refresh
 		model.position
-			.Subscribe( p => _view.transform.position = p )
+			.Subscribe( _view.SetPosition )
 			.AddTo( _view )
 		;
 	}
