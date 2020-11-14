@@ -8,16 +8,14 @@ public class PlayerController
 	PlayerView		_view;
 	PlayerModel		_model;
 
-
-	bool	_right;
-	bool	_left;
-	bool	_up;
-	bool	_down;
-
+	KeyState	_keyRight		= new KeyState( KeyCode.D );
+	KeyState	_keyLeft		= new KeyState( KeyCode.A );
+	KeyState	_keyUp			= new KeyState( KeyCode.W );
+	KeyState	_keyDown		= new KeyState( KeyCode.S );
 
 	Vector2Int Dir		=> new Vector2Int(
-											_right.ToInt() - _left.ToInt(),
-											_up.ToInt() - _down.ToInt()
+											_keyRight.ToInt - _keyLeft.ToInt,
+											_keyUp.ToInt - _keyDown.ToInt
 	);
 
 
@@ -26,10 +24,10 @@ public class PlayerController
 		_view		= view;
 		_model		= model;
 
-		BindKey( KeyCode.A, x => _left = x );
-		BindKey( KeyCode.D, x => _right = x );
-		BindKey( KeyCode.S, x => _down = x );
-		BindKey( KeyCode.W, x => _up = x );
+		BindKey( _keyRight	);
+		BindKey( _keyLeft	);
+		BindKey( _keyUp		);
+		BindKey( _keyDown	);
 		
 		Observable.EveryUpdate()
 			.Where( _ => Dir != Vector2Int.zero )
@@ -41,9 +39,13 @@ public class PlayerController
 
 
 	void OnPositionChange( Vector2 pos )
-	{
+	=>
 		_view.transform.position		= pos;
-	}
+
+
+	void BindKey( KeyState keyState )
+	=>
+		BindKey( keyState.KeyCode, keyState.Set );
 
 
 	void BindKey( KeyCode keyCode, Action< bool > action )
