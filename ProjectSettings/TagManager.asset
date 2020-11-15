@@ -14,11 +14,11 @@ TagManager:
   - 
   - 
   - Boundaries
-  - Player Ship
+  - Ship
+  - ShipTrigger
   - Asteroids
-  - 
-  - 
-  - 
+  - AsteroidsTriggers
+  - Bullets
   - 
   - 
   - 
