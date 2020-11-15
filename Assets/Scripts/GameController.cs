@@ -8,6 +8,8 @@ public class GameController : MonoBehaviour
 	{
 		TechSettings();
 
+		UiController.Init();
+
 		// [Escape] - Quit
 		Observable.EveryUpdate()
 			.Where( _ => Input.GetKeyDown( KeyCode.Escape ) )

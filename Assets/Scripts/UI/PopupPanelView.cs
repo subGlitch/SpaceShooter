@@ -1,13 +1,15 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 
 public class PopupPanelView : MonoBehaviour
 {
-	public void OnRestart()
-	{
-		LevelController.Instance.RestartLevel();
+	public event Action		OnRestart;
 
-		gameObject.SetActive( false );
+
+	public void Restart()
+	{
+		OnRestart?.Invoke();
 	}
 }
 

@@ -3,6 +3,20 @@
 
 public static class UiController
 {
+	public static void Init()
+	{
+		Refs.Instance.PopupPanelView.OnRestart		+= OnLevelRestart;
+	}
+
+
+	static void OnLevelRestart()
+	{
+		LevelController.Instance.RestartLevel();
+
+		PopupPanelSetActive( false );
+	}
+
+
 	public static void BindShipModel( ShipModel shipModel )
 	{
 		shipModel.Hull
@@ -12,7 +26,13 @@ public static class UiController
 
 	public static void OpenPopupPanel()
 	{
-		Refs.Instance.PopupPanelView.gameObject.SetActive( true );
+		PopupPanelSetActive( true );
+	}
+
+
+	static void PopupPanelSetActive( bool active )
+	{
+		Refs.Instance.PopupPanelView.gameObject.SetActive( active );
 	}
 }
 
