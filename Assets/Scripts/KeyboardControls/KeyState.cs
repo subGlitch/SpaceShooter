@@ -4,13 +4,10 @@ using UnityEngine;
 
 public class KeyState
 {
-	public KeyCode KeyCode { get; }
-
-
 	public ReadOnlyReactiveProperty< bool > IsPressed;
 
 
-	public int ToInt	=> IsPressed.Value.ToInt();
+	public KeyCode KeyCode { get; }
 
 
 	public KeyState( KeyCode keyCode )

@@ -13,6 +13,6 @@ public class DirKeyState : KeyState
 	}
 
 
-	public static implicit operator Vector2Int ( DirKeyState x )		=> x.Dir * x.ToInt;
+	public static implicit operator Vector2Int ( DirKeyState x )		=> x.Dir * (x.IsPressed.Value ? 1 : 0);
 }
 
