@@ -1,4 +1,5 @@
 ﻿using UniRx;
+using UnityEngine;
 
 
 public static class UiController
@@ -6,6 +7,12 @@ public static class UiController
 	public static void Init()
 	{
 		Refs.Instance.PopupPanelView.OnRestart		+= OnLevelRestart;
+
+		// [Escape] - Quit
+		Observable.EveryUpdate()
+			.Where( _ => Input.GetKeyDown( KeyCode.Escape ) )
+			.Subscribe( _ => Application.Quit() )
+		;
 	}
 
 

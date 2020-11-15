@@ -1,5 +1,4 @@
-﻿using UniRx;
-using UnityEngine;
+﻿using UnityEngine;
 
 
 public class GameController : MonoBehaviour
@@ -9,12 +8,6 @@ public class GameController : MonoBehaviour
 		TechSettings();
 
 		UiController.Init();
-
-		// [Escape] - Quit
-		Observable.EveryUpdate()
-			.Where( _ => Input.GetKeyDown( KeyCode.Escape ) )
-			.Subscribe( _ => Application.Quit() )
-		;
 
 		LevelController.Instance.StartLevel();
 	}
