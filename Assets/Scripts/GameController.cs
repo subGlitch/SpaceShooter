@@ -20,7 +20,7 @@ public class GameController : MonoBehaviour
 
 		const float speed				= 5;
 
-		ShipView view					= Instantiate( Refs.Instance.ShipViewPrefab );
+		ShipView view					= Instantiate( Refs.Instance.ShipViewPrefab, Refs.Instance.ShipSpawnPos.position, Refs.Instance.ShipViewPrefab.transform.rotation );
 	    ShipModel model					= new ShipModel( speed );
 		ShipController controller		= new ShipController( model, view );
 

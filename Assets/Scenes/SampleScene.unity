@@ -264,7 +264,7 @@ RectTransform:
   m_Children:
   - {fileID: 1059841724}
   m_Father: {fileID: 1322803532}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -459,6 +459,41 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &987461279
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 987461280}
+  m_Layer: 5
+  m_Name: Ship Spawn Pos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &987461280
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 987461279}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1322803532}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 200, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1059841723
 GameObject:
   m_ObjectHideFlags: 0
@@ -677,6 +712,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1110441346}
+  - {fileID: 987461280}
   - {fileID: 255631353}
   - {fileID: 1606344373}
   m_Father: {fileID: 0}
@@ -801,6 +837,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShipViewPrefab: {fileID: 8686754851377550607, guid: 0c741527fcfeb854b99c8945b9951bb9, type: 3}
   AsteroidViewPrefab: {fileID: 3028080609780267148, guid: f0d517bbdaf1e2c4f97f4badb254d149, type: 3}
+  ShipSpawnPos: {fileID: 987461280}
 --- !u!4 &1511716135
 Transform:
   m_ObjectHideFlags: 0
@@ -847,7 +884,7 @@ RectTransform:
   - {fileID: 1868565059}
   - {fileID: 330810032}
   m_Father: {fileID: 1322803532}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
