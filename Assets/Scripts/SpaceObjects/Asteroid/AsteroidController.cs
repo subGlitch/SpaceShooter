@@ -2,7 +2,7 @@
 using UnityEngine;
 
 
-public class AsteroidController
+public class AsteroidController : IDestroyable
 {
 	public delegate void AsteroidControllerEvent( AsteroidController controller );
 	public event AsteroidControllerEvent	OnDestroy;
