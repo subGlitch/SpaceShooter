@@ -1,12 +1,8 @@
-﻿using UniRx;
-using UnityEngine;
+﻿using UnityEngine;
 
 
 public class DirKeyState : KeyState
 {
-	public ReadOnlyReactiveProperty< Vector2Int >	Value;
-
-
 	public Vector2Int Dir { get; }
 
 
@@ -17,14 +13,6 @@ public class DirKeyState : KeyState
 	}
 
 
-	public override void Init( ReadOnlyReactiveProperty<bool> isPressed )
-	{
-		base.Init( isPressed );
-
-		Value		= IsPressed
-						.Select( x => Dir * x.ToInt() )
-						.ToReadOnlyReactiveProperty()
-		;
-	}
+	public static implicit operator Vector2Int ( DirKeyState x )		=> x.Dir * (x.IsPressed.Value ? 1 : 0);
 }
 

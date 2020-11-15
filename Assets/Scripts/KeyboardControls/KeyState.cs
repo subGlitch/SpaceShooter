@@ -16,7 +16,7 @@ public class KeyState
 	}
 
 
-	public virtual void Init( ReadOnlyReactiveProperty< bool > isPressed )
+	public void Init( ReadOnlyReactiveProperty< bool > isPressed )
 	{
 		IsPressed		= isPressed;
 	}

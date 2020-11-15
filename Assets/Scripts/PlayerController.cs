@@ -8,13 +8,16 @@ public class PlayerController
 	PlayerModel		_model;
 
 
-	// Keyboard Controls
+#region Keyboard Controls
+
 	DirKeyState		_keyRight		= new DirKeyState( KeyCode.D,	Vector2Int.right	);
 	DirKeyState		_keyLeft		= new DirKeyState( KeyCode.A,	Vector2Int.left		);
 	DirKeyState		_keyUp			= new DirKeyState( KeyCode.W,	Vector2Int.up		);
 	DirKeyState		_keyDown		= new DirKeyState( KeyCode.S,	Vector2Int.down		);
 
-	ReadOnlyReactiveProperty< Vector2Int > Dir;
+	ReadOnlyReactiveProperty< Vector2Int >	Dir;
+
+#endregion
 
 
 	public PlayerController( PlayerModel model, PlayerView view )
@@ -46,16 +49,17 @@ public class PlayerController
 		BindKey( _keyDown	);
 
 		Dir		= Observable.Merge(
-					_keyRight	.Value,
-					_keyLeft	.Value,
-					_keyUp		.Value,
-					_keyDown	.Value
+					_keyRight	.IsPressed,
+					_keyLeft	.IsPressed,
+					_keyUp		.IsPressed,
+					_keyDown	.IsPressed
 				)
 				.Select( x =>
-					_keyRight	.Value.Value +
-					_keyLeft	.Value.Value +
-					_keyUp		.Value.Value +
-					_keyDown	.Value.Value
+					(Vector2Int)
+					_keyRight	+
+					_keyLeft	+
+					_keyUp		+
+					_keyDown
 				)
 				.ToReadOnlyReactiveProperty()
 		;
