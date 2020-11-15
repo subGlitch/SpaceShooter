@@ -2,12 +2,8 @@
 using UnityEngine;
 
 
-public class AsteroidController : IDestroyable
+public class AsteroidController : ADestroyable
 {
-	public delegate void AsteroidControllerEvent( IDestroyable controller );
-	public event AsteroidControllerEvent	OnDestroy;
-
-
 	AsteroidView	_view;
 
 
@@ -19,14 +15,7 @@ public class AsteroidController : IDestroyable
 	}
 
 
-	void Destroy()
-	{
-		DestroySilently();
-		OnDestroy?.Invoke( this );
-	}
-
-
-	public void DestroySilently()
+	public override void DestroySilently()
 	=>
 		GameObject.Destroy( _view.gameObject );
 }
