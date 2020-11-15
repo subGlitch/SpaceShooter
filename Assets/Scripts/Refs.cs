@@ -12,6 +12,6 @@ public class Refs : MB_Singleton< Refs >
 
 	[Header( "UI Refs" )]
 	public HudView			HudView;
-	public GameObject		PopupPanelView;
+	public PopupPanelView	PopupPanelView;
 }
 

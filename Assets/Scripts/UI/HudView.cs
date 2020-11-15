@@ -15,13 +15,5 @@ public class HudView : MonoBehaviour
 	{
 		_hull.text		= $"Hull: { hull }";
 	}
-
-
-	public void OnOK()
-	{
-		LevelController.Instance.RestartLevel();
-
-		gameObject.SetActive( false );
-	}
 }
 
