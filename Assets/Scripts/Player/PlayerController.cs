@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class PlayerController
 {
-	PlayerView		_view;
-	PlayerModel		_model;
+	PlayerView			_view;
+	PlayerTriggerView	_triggerView;
+	PlayerModel			_model;
 
 
 #region Keyboard Controls
@@ -18,23 +19,26 @@ public class PlayerController
 #endregion
 
 
-	public PlayerController( PlayerModel model, PlayerView view )
+	public PlayerController( PlayerModel model, PlayerView view, PlayerTriggerView triggerView )
 	{
-		_view		= view;
-		_model		= model;
+		_view				= view;
+		_triggerView		= triggerView;
+		_model				= model;
 
 		// Init Player Controls
 		BindKeys();
 
 		// Bind View
-		_view.Direction		= MergeKeys();
-		_view.Speed			= _model.Speed
+		view.Direction		= MergeKeys();
+		view.Speed			= model.Speed
 									.ToReadOnlyReactiveProperty();
 
 		// Bind Model
-		_model.Position		= Observable.EveryFixedUpdate()
-									.Select( _ => _view.Position )
+		model.Position		= Observable.EveryFixedUpdate()
+									.Select( _ => view.Position )
 									.ToReadOnlyReactiveProperty();
+		triggerView.AsteroidCollisions
+			.Subscribe( _ => model.TakeDamage() );
 	}
 
 	

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-	public PlayerView		_playerView;
+	public PlayerView			_playerView;
+	public PlayerTriggerView	_playerTriggerView;
 
 
 	void Start()
@@ -20,7 +21,7 @@ public class GameController : MonoBehaviour
 		const float speed				= 5;
 
 	    PlayerModel model				= new PlayerModel( speed );
-		PlayerController controller		= new PlayerController( model, _playerView );
+		PlayerController controller		= new PlayerController( model, _playerView, _playerTriggerView );
 	}
 
 

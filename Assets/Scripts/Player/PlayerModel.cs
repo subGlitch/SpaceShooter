@@ -15,5 +15,13 @@ public class PlayerModel
 		Hull		= new ReactiveProperty< int >( 3 );
 		Speed		= new ReactiveProperty< float >( speed );
 	}
+
+
+	public void TakeDamage()
+	{
+		Hull.Value --;
+
+		Debug.Log( "Damage Taken" );
+	}
 }
 
