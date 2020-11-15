@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using UniRx;
+using UniRx.Triggers;
+using UnityEngine;
 
 
 public class AsteroidView : MonoBehaviour
@@ -13,6 +15,15 @@ public class AsteroidView : MonoBehaviour
 	public void Init( Vector2 velocity )
 	{
 		_rb.velocity	 = velocity;
+	}
+
+
+	void Start()
+	{
+		gameObject
+			.OnTriggerEnter2DAsObservable()
+			.Subscribe( _ => Debug.Log( "Coll" ))
+		;
 	}
 }
 
