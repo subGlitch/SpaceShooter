@@ -25,6 +25,7 @@ public class LevelController : MB_Singleton< LevelController >
 
 	void Start()
 	{
+		// Spawn asteroids forever ...
 	    Observable
 			.Interval( TimeSpan.FromSeconds( .25f ))
 			.Subscribe( _ => SpawnAsteroid() );
