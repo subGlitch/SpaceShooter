@@ -2,7 +2,7 @@
 using UnityEngine;
 
 
-public class PlayerModel
+public class ShipModel
 {
 	public ReactiveProperty< int >					Hull		{ get; }
 	public ReactiveProperty< float >				Speed		{ get; }
@@ -10,7 +10,7 @@ public class PlayerModel
 	public ReadOnlyReactiveProperty< Vector2 >		Position;
 
 
-	public PlayerModel( float speed )
+	public ShipModel( float speed )
 	{
 		Hull		= new ReactiveProperty< int >( 3 );
 		Speed		= new ReactiveProperty< float >( speed );

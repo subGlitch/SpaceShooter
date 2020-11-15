@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-	public PlayerView			_playerView;
-	public PlayerTriggerView	_playerTriggerView;
+	public ShipView				_shipView;
+	public ShipTriggerView		_shipTriggerView;
 	public HudView				_hudView;
 
 
@@ -21,8 +21,8 @@ public class GameController : MonoBehaviour
 
 		const float speed				= 5;
 
-	    PlayerModel model				= new PlayerModel( speed );
-		PlayerController controller		= new PlayerController( model, _playerView, _playerTriggerView );
+	    ShipModel model				= new ShipModel( speed );
+		ShipController controller		= new ShipController( model, _shipView, _shipTriggerView );
 
 		model.Hull.Subscribe( x => _hudView.SetHull( x ) );
 	}

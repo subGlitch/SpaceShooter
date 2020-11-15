@@ -2,11 +2,11 @@
 using UnityEngine;
 
 
-public class PlayerController
+public class ShipController
 {
-	PlayerView			_view;
-	PlayerTriggerView	_triggerView;
-	PlayerModel			_model;
+	ShipView			_view;
+	ShipTriggerView	_triggerView;
+	ShipModel			_model;
 
 
 #region Keyboard Controls
@@ -19,7 +19,7 @@ public class PlayerController
 #endregion
 
 
-	public PlayerController( PlayerModel model, PlayerView view, PlayerTriggerView triggerView )
+	public ShipController( ShipModel model, ShipView view, ShipTriggerView triggerView )
 	{
 		_view				= view;
 		_triggerView		= triggerView;

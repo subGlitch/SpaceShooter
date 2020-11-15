@@ -2,7 +2,7 @@
 using UnityEngine;
 
 
-public class PlayerTriggerView : MonoBehaviour
+public class ShipTriggerView : MonoBehaviour
 {
 	public System.IObservable< Collider2D >		AsteroidCollisions;
 

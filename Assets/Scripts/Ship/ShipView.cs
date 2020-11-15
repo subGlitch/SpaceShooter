@@ -2,7 +2,7 @@
 using UnityEngine;
 
 
-public class PlayerView : MonoBehaviour
+public class ShipView : MonoBehaviour
 {
 #pragma warning disable 0649
 
