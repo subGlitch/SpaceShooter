@@ -28,12 +28,13 @@ public class PlayerController
 
 		// Bind View
 		_view.Direction		= MergeKeys();
-		_view.Speed			= _model.Speed.ToReadOnlyReactiveProperty();
+		_view.Speed			= _model.Speed
+									.ToReadOnlyReactiveProperty();
 
 		// Bind Model
 		_model.Position		= Observable.EveryFixedUpdate()
-								.Select( _ => _view.Position )
-								.ToReadOnlyReactiveProperty();
+									.Select( _ => _view.Position )
+									.ToReadOnlyReactiveProperty();
 	}
 
 	

@@ -2,7 +2,7 @@
 using UnityEngine;
 
 
-public class Test : MonoBehaviour
+public class GameController : MonoBehaviour
 {
 	public PlayerView		_playerView;
 
