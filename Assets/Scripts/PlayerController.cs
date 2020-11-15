@@ -48,17 +48,17 @@ public class PlayerController
 
 	void BindKey( KeyState keyState )
 	{
-		KeyCode keyCode		= keyState.KeyCode;
+		KeyCode keyCode			= keyState.KeyCode;
 
-		Observable.EveryUpdate()
-			.Where( _ =>
-				Input.GetKeyDown	( keyCode ) ||
-				Input.GetKeyUp		( keyCode )
-			)
-			.Select( _ =>
-				Input.GetKey		( keyCode )
-			)
-			.Subscribe( keyState.Set )
+		keyState.IsPressed		= Observable.EveryUpdate()
+									.Where( _ =>
+										Input.GetKeyDown	( keyCode ) ||
+										Input.GetKeyUp		( keyCode )
+									)
+									.Select( _ =>
+										Input.GetKey		( keyCode )
+									)
+									.ToReadOnlyReactiveProperty()
 		;
 	}
 }
