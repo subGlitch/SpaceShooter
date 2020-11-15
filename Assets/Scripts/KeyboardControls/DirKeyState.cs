@@ -9,10 +9,20 @@ public class DirKeyState : KeyState
 	public DirKeyState( KeyCode keyCode, Vector2Int dir )
 		: base( keyCode )
 	{
-		Dir			= dir;
+		Dir		= dir;
 	}
 
 
-	public static implicit operator Vector2Int ( DirKeyState x )		=> x.Dir * (x.IsPressed.Value ? 1 : 0);
+	public static implicit operator Vector2Int ( DirKeyState x )
+	=>
+		x.Dir * x.ToInt();
+
+
+	int ToInt()
+	=>
+		IsPressed.HasValue		?
+		IsPressed.Value.ToInt()	:
+		0
+	;
 }
 
