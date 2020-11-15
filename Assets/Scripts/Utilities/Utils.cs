@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 
 public static class Utils
@@ -19,6 +20,15 @@ public static class Utils
 		}
 
 		return new Rect( min, max - min );
+	}
+
+
+	public static T SingletonPattern< T >( T @this, T instance ) where T : class
+	{
+		if (instance != null)
+			throw new Exception( $"Singleton pattern violation: instance of class { @this.GetType().Name } already exists!" );
+		
+		return @this;
 	}
 }
 
