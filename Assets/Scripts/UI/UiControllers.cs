@@ -2,10 +2,15 @@
 using UnityEngine;
 
 
-public static class UiController
+public static class UiControllers
 {
+	public static HudController		HudController;
+
+
 	public static void Init()
 	{
+		HudController		= new HudController( Refs.Instance.HudView );
+
 		Refs.Instance.PopupPanelView.OnRestart		+= OnLevelRestart;
 
 		// [Escape] - Quit
@@ -21,13 +26,6 @@ public static class UiController
 		LevelController.Instance.RestartLevel();
 
 		PopupPanelSetActive( false );
-	}
-
-
-	public static void BindShipModel( ShipModel shipModel )
-	{
-		shipModel.Hull
-			.Subscribe( x => Refs.Instance.HudView.SetHull( x ) );
 	}
 
 

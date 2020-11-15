@@ -7,7 +7,7 @@ public class GameController : MonoBehaviour
 	{
 		TechSettings();
 
-		UiController.Init();
+		UiControllers.Init();
 
 		LevelController.Instance.StartLevel();
 	}

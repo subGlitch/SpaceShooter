@@ -52,9 +52,9 @@ public class LevelController : MB_Singleton< LevelController >
 	    ShipModel model					= new ShipModel( speed );
 		ShipController controller		= new ShipController( model, view );
 
-		UiController.BindShipModel( model );
+		UiControllers.HudController.BindShipModel( model );
 
-		model.OnDestroyed				+= () => UiController.OpenPopupPanel();
+		model.OnDestroyed				+= () => UiControllers.OpenPopupPanel();
 	}
 
 
