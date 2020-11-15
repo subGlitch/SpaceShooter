@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AsteroidController : IDestroyable
 {
-	public delegate void AsteroidControllerEvent( AsteroidController controller );
+	public delegate void AsteroidControllerEvent( IDestroyable controller );
 	public event AsteroidControllerEvent	OnDestroy;
 
 

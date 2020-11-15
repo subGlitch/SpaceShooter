@@ -20,7 +20,7 @@ public class LevelController : MB_Singleton< LevelController >
 #endregion
 
 
-	HashSet< AsteroidController >		_asteroids		= new HashSet< AsteroidController >();
+	HashSet< IDestroyable >	_asteroids		= new HashSet< IDestroyable >();
 
 
 	void Start()
@@ -39,7 +39,7 @@ public class LevelController : MB_Singleton< LevelController >
 
 	void ClearLevel()
 	{
-		foreach (AsteroidController asteroid in _asteroids)
+		foreach (IDestroyable asteroid in _asteroids)
 			asteroid.DestroySilently();
 
 		_asteroids.Clear();
