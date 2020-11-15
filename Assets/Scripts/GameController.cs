@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
 	public ShipView				_shipView;
-	public ShipTriggerView		_shipTriggerView;
+	public CollidableView		_shipTriggerView;
 	public HudView				_hudView;
 
 	public GameObject			_popupPanelView;

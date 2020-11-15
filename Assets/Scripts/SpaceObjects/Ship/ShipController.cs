@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class ShipController
 {
-	ShipView			_view;
-	ShipTriggerView		_triggerView;
-	ShipModel			_model;
+	ShipView	_view;
+	ShipModel	_model;
 
 
 #region Keyboard Controls
@@ -19,11 +18,10 @@ public class ShipController
 #endregion
 
 
-	public ShipController( ShipModel model, ShipView view, ShipTriggerView triggerView )
+	public ShipController( ShipModel model, ShipView view, CollidableView triggerView )
 	{
-		_view				= view;
-		_triggerView		= triggerView;
-		_model				= model;
+		_view		= view;
+		_model		= model;
 
 
 		// Init Player Controls
@@ -36,16 +34,16 @@ public class ShipController
 									.ToReadOnlyReactiveProperty();
 
 		// Bind Model
-		model.Position		= Observable.EveryFixedUpdate()
-									.Select( _ => view.Position )
-									.ToReadOnlyReactiveProperty();
-		triggerView.Collisions
-			.Subscribe( _ => model.TakeDamage() );
-		model.OnDestroyed	+= () =>
 		{
-			GameObject.Destroy( _view			.gameObject );
-			GameObject.Destroy( _triggerView	.gameObject );
-		};
+			model.Position			= Observable.EveryFixedUpdate()
+											.Select( _ => view.Position )
+											.ToReadOnlyReactiveProperty();
+
+			triggerView.Collisions
+					.Subscribe( _ => model.TakeDamage() );
+
+			model.OnDestroyed		+= () => GameObject.Destroy( _view.gameObject );
+		}
 	}
 
 	
