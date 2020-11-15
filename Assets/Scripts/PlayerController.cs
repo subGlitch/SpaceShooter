@@ -23,6 +23,9 @@ public class PlayerController
 
 		// Player Control
 		BindKeys();
+		Observable.EveryUpdate()
+			.Subscribe( _ => _view.SetVelocity( Dir ) )
+		;
 		Observable.EveryFixedUpdate()
 			.Subscribe( _ => _view.SetVelocity( Dir ) )
 		;

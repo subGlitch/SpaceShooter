@@ -1,13 +1,16 @@
-﻿using UnityEngine;
+﻿using UniRx;
+using UnityEngine;
 
 
 public class KeyState
 {
 	public KeyCode KeyCode { get; }
-	public bool IsPressed { get; private set; }
 
 
-	public int ToInt	=> IsPressed.ToInt();
+	public readonly ReactiveProperty< bool > IsPressed		= new ReactiveProperty< bool >();
+
+
+	public int ToInt	=> IsPressed.Value.ToInt();
 
 
 	public KeyState( KeyCode keyCode )
@@ -18,7 +21,7 @@ public class KeyState
 
 	public void Set( bool isPressed )
 	{
-		IsPressed		= isPressed;
+		IsPressed.Value		= isPressed;
 	}
 }
 
