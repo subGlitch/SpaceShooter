@@ -9,11 +9,11 @@ public class PopupPanelController
 	{
 		_view		= view;
 
-		view.OnRestart		+= OnLevelRestart;
+		view.OnRestart		+= RestartLevel;
 	}
 
 
-	void OnLevelRestart()
+	public void RestartLevel()
 	{
 		LevelController.Instance.RestartLevel();
 
