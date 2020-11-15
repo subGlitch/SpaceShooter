@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-	public HudView			_hudView;
-	public GameObject		_popupPanelView;
-
-
 	void Start()
 	{
 		TechSettings();
@@ -18,15 +14,7 @@ public class GameController : MonoBehaviour
 			.Subscribe( _ => Application.Quit() )
 		;
 
-		const float speed				= 5;
-
-		ShipView view					= Instantiate( Refs.Instance.ShipViewPrefab, Refs.Instance.ShipSpawnPos.position, Refs.Instance.ShipViewPrefab.transform.rotation );
-	    ShipModel model					= new ShipModel( speed );
-		ShipController controller		= new ShipController( model, view );
-
-		model.Hull.Subscribe( x => _hudView.SetHull( x ) );
-
-		model.OnDestroyed				+= () => _popupPanelView.SetActive( true );
+		LevelController.Instance.StartLevel();
 	}
 
 

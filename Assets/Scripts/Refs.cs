@@ -9,5 +9,9 @@ public class Refs : MB_Singleton< Refs >
 
 	[Header( "Refs" )]
 	public Transform		ShipSpawnPos;
+
+	[Header( "UI Refs" )]
+	public HudView			HudView;
+	public GameObject		PopupPanelView;
 }
 

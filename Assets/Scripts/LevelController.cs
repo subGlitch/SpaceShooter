@@ -18,13 +18,13 @@ public class LevelController : MB_Singleton< LevelController >
 	{
 	    Observable
 			.Interval( TimeSpan.FromSeconds( .25f ))
-			.Subscribe( _ => Spawn() );
+			.Subscribe( _ => SpawnAsteroid() );
 	}
 
 
 	public void StartLevel()
 	{
-		
+		SpawnShip();
 	}
 
 
@@ -37,7 +37,21 @@ public class LevelController : MB_Singleton< LevelController >
 	}
 
 
-	void Spawn()
+	void SpawnShip()
+	{
+		const float speed				= 5;
+
+		ShipView view					= Instantiate( Refs.Instance.ShipViewPrefab, Refs.Instance.ShipSpawnPos.position, Refs.Instance.ShipViewPrefab.transform.rotation );
+	    ShipModel model					= new ShipModel( speed );
+		ShipController controller		= new ShipController( model, view );
+
+		model.Hull.Subscribe( x => Refs.Instance.HudView.SetHull( x ) );
+
+		model.OnDestroyed				+= () => Refs.Instance.PopupPanelView.SetActive( true );
+	}
+
+
+	void SpawnAsteroid()
 	{
 		const float expand			= 1;
 		const float shiftRight		= 1;
