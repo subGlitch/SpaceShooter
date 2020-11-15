@@ -20,15 +20,25 @@ public class LevelController : MonoBehaviour
 	void Start()
 	{
 	    Observable
-			.Interval( TimeSpan.FromSeconds( .5f ))
+			.Interval( TimeSpan.FromSeconds( .25f ))
 			.Subscribe( _ => Spawn() );
 	}
 
 
 	void Spawn()
 	{
-		float y01					= Random.value;
-		Vector2 position			= Vector2.Lerp( Boundaries.x1y0, Boundaries.Max, y01 );
+		const float expand			= 1;
+		const float shiftRight		= 1;
+
+		Vector2 expandOffset		= Vector2.up * Boundaries.Rect.height * expand * .5f;
+		Vector2 position			=
+										Vector2.Lerp(
+														Boundaries.x1y0	- expandOffset,
+														Boundaries.Max	+ expandOffset,
+														Random.value
+										) +
+										Vector2.right * shiftRight
+		;
 
 		Vector2 baseVelocity		= Vector2.left * BaseSpeed;
 		Vector2 addonVelocity		= Random.insideUnitCircle * AddonSpeed;

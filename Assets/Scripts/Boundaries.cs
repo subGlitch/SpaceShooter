@@ -3,18 +3,18 @@
 
 public class Boundaries : MonoBehaviour
 {
-	static Rect		_rect;
+	public static Rect		Rect;
 
 
-	public static Vector2 Min		=> _rect.min;
-	public static Vector2 Max		=> _rect.max;
-	public static Vector2 x0y1		=> new Vector2( _rect.xMin, _rect.yMax );
-	public static Vector2 x1y0		=> new Vector2( _rect.xMax, _rect.yMin );
+	public static Vector2 Min		=> Rect.min;
+	public static Vector2 Max		=> Rect.max;
+	public static Vector2 x0y1		=> new Vector2( Rect.xMin, Rect.yMax );
+	public static Vector2 x1y0		=> new Vector2( Rect.xMax, Rect.yMin );
 
 
 	void Start()
 	{
-		_rect		= GetComponent< RectTransform >().GetWorldRect();
+		Rect		= GetComponent< RectTransform >().GetWorldRect();
 
 		CreateEdgeCollider( x0y1, Max );		// Top
 		CreateEdgeCollider( Min, x1y0 );		// Bottom
