@@ -25,14 +25,16 @@ public class PlayerController
 		_view		= view;
 		_model		= model;
 
-		// Player Control
+		// Init Player Controls
 		BindKeys();
-		_direction.Subscribe( x => _view.SetDirection( x ) );
+
+		// Refresh View's direction 
+		_direction
+			.Subscribe( x => _view.SetDirection( x ) );
 
 		// Refresh Model's position
 		Observable.EveryFixedUpdate()
-			.Subscribe( _ => _model.RefreshPosition( _view.transform.position ) )
-		;
+			.Subscribe( _ => _model.RefreshPosition( _view.transform.position ) );
 	}
 
 	
@@ -64,17 +66,17 @@ public class PlayerController
 
 	void BindKey( KeyState keyState )
 	{
-		KeyCode keyCode			= keyState.KeyCode;
+		KeyCode keyCode		= keyState.KeyCode;
 
-		var isPressed			= Observable.EveryUpdate()
-									.Where( _ =>
-										Input.GetKeyDown	( keyCode ) ||
-										Input.GetKeyUp		( keyCode )
-									)
-									.Select( _ =>
-										Input.GetKey		( keyCode )
-									)
-									.ToReadOnlyReactiveProperty()
+		var isPressed		= Observable.EveryUpdate()
+								.Where( _ =>
+									Input.GetKeyDown	( keyCode ) ||
+									Input.GetKeyUp		( keyCode )
+								)
+								.Select( _ =>
+									Input.GetKey		( keyCode )
+								)
+								.ToReadOnlyReactiveProperty()
 		;
 
 		keyState.Init( isPressed );

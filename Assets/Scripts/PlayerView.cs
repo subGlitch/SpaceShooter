@@ -27,6 +27,7 @@ public class PlayerView : MonoBehaviour
 		_dir		= dir;
 	}
 
+
 	void FixedUpdate()
 	{
 		_rb.velocity		= (Vector2)_dir * _speed;
