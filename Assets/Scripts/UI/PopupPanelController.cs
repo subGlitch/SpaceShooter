@@ -1,18 +1,35 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿
 
-public class PopupPanelController : MonoBehaviour
+public class PopupPanelController
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+	PopupPanelView		_view;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
+	public PopupPanelController( PopupPanelView view )
+	{
+		_view		= view;
+
+		view.OnRestart		+= OnLevelRestart;
+	}
+
+
+	void OnLevelRestart()
+	{
+		LevelController.Instance.RestartLevel();
+
+		PanelSetActive( false );
+	}
+
+
+	public void OpenPanel()
+	{
+		PanelSetActive( true );
+	}
+
+
+	void PanelSetActive( bool active )
+	{
+		_view.gameObject.SetActive( active );
+	}
 }
+

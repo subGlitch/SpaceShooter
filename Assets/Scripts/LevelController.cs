@@ -54,7 +54,7 @@ public class LevelController : MB_Singleton< LevelController >
 
 		UiControllers.HudController.BindShipModel( model );
 
-		model.OnDestroyed				+= () => UiControllers.OpenPopupPanel();
+		model.OnDestroyed				+= () => UiControllers.PopupPanelController.OpenPanel();
 	}
 
 
