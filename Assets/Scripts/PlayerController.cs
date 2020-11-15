@@ -45,21 +45,19 @@ public class PlayerController
 
 
 	void BindKey( KeyState keyState )
-	=>
-		BindKey( keyState.KeyCode, keyState.Set );
+	{
+		KeyCode keyCode		= keyState.KeyCode;
 
-
-	void BindKey( KeyCode keyCode, Action< bool > action )
-	=>
 		Observable.EveryUpdate()
 			.Where( _ =>
 				Input.GetKeyDown	( keyCode ) ||
 				Input.GetKeyUp		( keyCode )
 			)
 			.Select( _ =>
-				Input.GetKeyDown	( keyCode )
+				Input.GetKey		( keyCode )
 			)
-			.Subscribe( action )
+			.Subscribe( keyState.Set )
 		;
+	}
 }
 
