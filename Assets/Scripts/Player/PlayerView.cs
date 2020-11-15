@@ -1,19 +1,17 @@
 ﻿using UnityEngine;
 
 
-[RequireComponent( typeof(Rigidbody2D) )]
 public class PlayerView : MonoBehaviour
 {
+#pragma warning disable 0649
+
+	[SerializeField] Rigidbody2D		_rb;
+
+#pragma warning restore 0649
+
+
 	float			_speed;
 	Vector2Int		_dir;
-
-	Rigidbody2D		_rb;
-
-
-	void Awake()
-	{
-		_rb			= GetComponent< Rigidbody2D >();
-	}
 
 
 	public void Init( float speed )
