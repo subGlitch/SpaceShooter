@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-	public ShipView			_shipView;
 	public HudView			_hudView;
-
 	public GameObject		_popupPanelView;
 
 
@@ -22,8 +20,9 @@ public class GameController : MonoBehaviour
 
 		const float speed				= 5;
 
+		ShipView view					= Instantiate( Refs.Instance.ShipViewPrefab );
 	    ShipModel model					= new ShipModel( speed );
-		ShipController controller		= new ShipController( model, _shipView );
+		ShipController controller		= new ShipController( model, view );
 
 		model.Hull.Subscribe( x => _hudView.SetHull( x ) );
 
