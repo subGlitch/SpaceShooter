@@ -10,7 +10,9 @@ public class Test : MonoBehaviour
 	{
 		const float speed		= 5;
 
-	    PlayerModel model				= new PlayerModel( speed );
+		_playerView.Init( speed );
+
+	    PlayerModel model				= new PlayerModel();
 		PlayerController controller		= new PlayerController( model, _playerView );
 	}
 }

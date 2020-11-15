@@ -1,28 +1,14 @@
-﻿using UniRx;
-using UnityEngine;
+﻿using UnityEngine;
 
 
 public class PlayerModel
 {
-	public readonly ReactiveProperty< Vector2 >		position		= new ReactiveProperty< Vector2 >();
+	Vector2		_position;
 
 
-	float	_speed;
-
-
-	public PlayerModel( float speed )
+	public void RefreshPosition( Vector2 pos )
 	{
-		_speed		= speed;
-	}
-
-
-	public void Move( Vector2Int dir )
-	{
-		Vector2 raw				= position.Value + (Vector2)dir * _speed * Time.deltaTime;
-		Vector2 clamped01		= Rect.PointToNormalized( Boundaries.Rect, raw );
-		Vector2 clamped			= Rect.NormalizedToPoint( Boundaries.Rect, clamped01 );
-
-		position.Value			= clamped;
+		_position		= pos;
 	}
 }
 

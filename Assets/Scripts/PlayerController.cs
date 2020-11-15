@@ -24,15 +24,13 @@ public class PlayerController
 
 		// Player Control
 		BindKeys();
-		Observable.EveryUpdate()
-			.Where( _ => Dir != Vector2Int.zero )
-			.Subscribe( _ => _model.Move( Dir ) )
+		Observable.EveryFixedUpdate()
+			.Subscribe( _ => _view.SetVelocity( Dir ) )
 		;
 
-		// View Refresh
-		model.position
-			.Subscribe( _view.SetPosition )
-			.AddTo( _view )
+		// Refresh Model's position
+		Observable.EveryFixedUpdate()
+			.Subscribe( _ => _model.RefreshPosition( _view.transform.position ) )
 		;
 	}
 

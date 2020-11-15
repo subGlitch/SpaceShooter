@@ -3,9 +3,18 @@
 
 public class PlayerView : MonoBehaviour
 {
-	public void SetPosition( Vector2 pos )
+	float	_speed;
+
+
+	public void Init( float speed )
 	{
-		GetComponent< Rigidbody2D >().MovePosition( pos );
+		_speed		= speed;
+	}
+
+
+	public void SetVelocity( Vector2Int dir )
+	{
+		GetComponent< Rigidbody2D >().velocity		= (Vector2)dir * _speed;
 	}
 }
 
