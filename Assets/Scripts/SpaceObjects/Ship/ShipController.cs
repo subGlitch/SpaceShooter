@@ -2,7 +2,7 @@
 using UnityEngine;
 
 
-public class ShipController
+public class ShipController : ADestroyable
 {
 #region Keyboard Controls
 
@@ -14,8 +14,14 @@ public class ShipController
 #endregion
 
 
+	ShipView	_view;
+
+
 	public ShipController( ShipModel model, ShipView view )
 	{
+		_view		= view;
+
+
 		// Init Player Controls
 		BindKeys();
 
@@ -34,9 +40,14 @@ public class ShipController
 			view.Collisions
 					.Subscribe( _ => model.TakeDamage() );
 
-			model.OnDestroyed		+= () => GameObject.Destroy( view.gameObject );
+			model.OnDestroyed		+= Destroy;
 		}
 	}
+
+
+	public override void DestroySilently()
+	=>
+		GameObject.Destroy( _view.gameObject );
 
 	
 	void BindKeys()

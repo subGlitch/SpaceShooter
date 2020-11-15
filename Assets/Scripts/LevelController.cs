@@ -20,7 +20,7 @@ public class LevelController : MB_Singleton< LevelController >
 #endregion
 
 
-	HashSet< ADestroyable >	_asteroids		= new HashSet< ADestroyable >();
+	HashSet< ADestroyable >	_spaceObjects		= new HashSet< ADestroyable >();
 
 
 	void Start()
@@ -39,10 +39,10 @@ public class LevelController : MB_Singleton< LevelController >
 
 	void ClearLevel()
 	{
-		foreach (ADestroyable asteroid in _asteroids)
+		foreach (ADestroyable asteroid in _spaceObjects)
 			asteroid.DestroySilently();
 
-		_asteroids.Clear();
+		_spaceObjects.Clear();
 	}
 
 
@@ -67,6 +67,8 @@ public class LevelController : MB_Singleton< LevelController >
 		UiControllers.HudController.BindShipModel( model );
 
 		model.OnDestroyed				+= () => UiControllers.PopupPanelController.OpenPanel();
+
+		Add( controller );
 	}
 
 
@@ -94,11 +96,18 @@ public class LevelController : MB_Singleton< LevelController >
 		);
 
 		AsteroidController controller		= new AsteroidController( view );
-		controller.OnDestroy		+= x => _asteroids.Remove( x );
 
 		view.Init( velocity );
 
-		_asteroids.Add( controller );
+		Add( controller );
+	}
+
+
+	void Add( ADestroyable controller )
+	{
+		_spaceObjects.Add( controller );
+
+		controller.OnDestroy		+= x => _spaceObjects.Remove( x );
 	}
 }
 
