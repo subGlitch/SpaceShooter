@@ -1,4 +1,5 @@
-﻿using UniRx;
+﻿using System;
+using UniRx;
 using UnityEngine;
 
 
@@ -13,10 +14,17 @@ public static class UiControllers
 		HudController				= new HudController( Refs.Instance.HudView );
 		PopupPanelController		= new PopupPanelController( Refs.Instance.PopupPanelView );
 
-		// [Escape] - Quit
+		// Special Keys
+		BindKey( KeyCode.Escape,	Application.Quit						);			// [Escape]		- Quit
+		BindKey( KeyCode.R,			LevelController.Instance.RestartLevel	);			// [R]			- Restart Level
+	}
+
+
+	static void BindKey( KeyCode keyCode, Action action )
+	{
 		Observable.EveryUpdate()
-			.Where( _ => Input.GetKeyDown( KeyCode.Escape ) )
-			.Subscribe( _ => Application.Quit() )
+			.Where( _ => Input.GetKeyDown( keyCode ) )
+			.Subscribe( _ => action() )
 		;
 	}
 }
