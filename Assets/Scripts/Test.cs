@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UniRx;
+using UnityEngine;
 
 
 public class Test : MonoBehaviour
@@ -9,6 +10,11 @@ public class Test : MonoBehaviour
 	void Start()
 	{
 		TechSettings();
+
+		Observable.EveryUpdate()
+			.Where( _ => Input.GetKeyDown( KeyCode.Escape ) )
+			.Subscribe( _ => Application.Quit() )
+		;
 
 		const float speed		= 5;
 
