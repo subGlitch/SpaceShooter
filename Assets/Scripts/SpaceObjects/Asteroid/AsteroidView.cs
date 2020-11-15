@@ -1,9 +1,8 @@
 ﻿using UniRx;
-using UniRx.Triggers;
 using UnityEngine;
 
 
-public class AsteroidView : MonoBehaviour
+public class AsteroidView : CollidableView
 {
 #pragma warning disable 0649
 
@@ -18,10 +17,11 @@ public class AsteroidView : MonoBehaviour
 	}
 
 
-	void Start()
+	protected override void Start()
 	{
-		gameObject
-			.OnTriggerEnter2DAsObservable()
+		base.Start();
+
+		Collisions
 			.Subscribe( _ => Debug.Log( "Coll" ))
 		;
 	}

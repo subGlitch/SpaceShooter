@@ -39,7 +39,7 @@ public class ShipController
 		model.Position		= Observable.EveryFixedUpdate()
 									.Select( _ => view.Position )
 									.ToReadOnlyReactiveProperty();
-		triggerView.AsteroidCollisions
+		triggerView.Collisions
 			.Subscribe( _ => model.TakeDamage() );
 		model.OnDestroyed	+= () =>
 		{
