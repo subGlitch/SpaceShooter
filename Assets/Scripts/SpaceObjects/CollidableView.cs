@@ -7,7 +7,7 @@ public class CollidableView : MonoBehaviour
 	public System.IObservable< Collider2D >		Collisions;
 
 
-	protected virtual void Start()
+	void Awake()
 	{
 		Collisions		= gameObject.OnTriggerEnter2DAsObservable();
 	}

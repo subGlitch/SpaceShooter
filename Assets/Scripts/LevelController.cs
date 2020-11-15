@@ -44,9 +44,11 @@ public class LevelController : MonoBehaviour
 		Vector2 addonVelocity		= Random.insideUnitCircle * AddonSpeed;
 		Vector2 velocity			= baseVelocity + addonVelocity;
 
-		AsteroidView asteroid		= Instantiate( _prefab, position, Quaternion.identity );
+		AsteroidView view			= Instantiate( _prefab, position, Quaternion.identity );
 
-		asteroid.Init( velocity );
+		AsteroidController controller		= new AsteroidController( view );
+
+		view.Init( velocity );
 	}
 }
 
