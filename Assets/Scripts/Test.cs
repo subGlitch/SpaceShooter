@@ -8,12 +8,31 @@ public class Test : MonoBehaviour
 
 	void Start()
 	{
+		TechSettings();
+
 		const float speed		= 5;
 
 		_playerView.Init( speed );
 
 	    PlayerModel model				= new PlayerModel();
 		PlayerController controller		= new PlayerController( model, _playerView );
+	}
+
+
+	void TechSettings()
+	{
+		#if UNITY_EDITOR
+		QualitySettings.vSyncCount				= 1;			// for FPS cap in Unity Editor
+		Application.targetFrameRate				= 60;			// for FPS cap in Unity Editor
+		#else
+		if (Application.isMobilePlatform)
+			Application.targetFrameRate			= 60;
+		else
+			Application.targetFrameRate			= -1;
+		#endif
+
+		QualitySettings.maxQueuedFrames			= 0;
+		Screen.sleepTimeout						= SleepTimeout.NeverSleep;
 	}
 }
 
