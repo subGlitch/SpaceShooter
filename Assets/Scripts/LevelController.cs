@@ -48,7 +48,12 @@ public class LevelController : MB_Singleton< LevelController >
 	{
 		const float speed				= 5;
 
-		ShipView view					= Instantiate( Refs.Instance.ShipViewPrefab, Refs.Instance.ShipSpawnPos.position, Refs.Instance.ShipViewPrefab.transform.rotation );
+		ShipView view					= Instantiate(
+														Refs.Instance.ShipViewPrefab,
+														Refs.Instance.ShipSpawnPos.position,
+														Refs.Instance.ShipViewPrefab.transform.rotation,
+														Refs.Instance.Gameplay
+		);
 	    ShipModel model					= new ShipModel( speed );
 		ShipController controller		= new ShipController( model, view );
 
@@ -77,7 +82,12 @@ public class LevelController : MB_Singleton< LevelController >
 		Vector2 addonVelocity		= Random.insideUnitCircle * AddonSpeed;
 		Vector2 velocity			= baseVelocity + addonVelocity;
 
-		AsteroidView view			= Instantiate( Refs.Instance.AsteroidViewPrefab, position, Quaternion.identity );
+		AsteroidView view			= Instantiate(
+													Refs.Instance.AsteroidViewPrefab,
+													position,
+													Quaternion.identity,
+													Refs.Instance.Gameplay
+		);
 
 		AsteroidController controller		= new AsteroidController( view );
 		controller.OnDestroy		+= x => _asteroids.Remove( x );
