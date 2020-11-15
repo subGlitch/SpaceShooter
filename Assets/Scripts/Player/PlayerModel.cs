@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class PlayerModel
 {
-	public readonly ReactiveProperty< Vector2Int >	direction		= new ReactiveProperty< Vector2Int >();
+	public readonly ReactiveProperty< float >	Speed;
 
 
 	Vector2		_position;
+
+
+	public PlayerModel( float speed )
+	{
+		Speed		= new ReactiveProperty< float >( speed );
+	}
 
 
 	public void RefreshPosition( Vector2 pos )

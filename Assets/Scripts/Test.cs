@@ -11,16 +11,15 @@ public class Test : MonoBehaviour
 	{
 		TechSettings();
 
+		// [Escape] - Quit
 		Observable.EveryUpdate()
 			.Where( _ => Input.GetKeyDown( KeyCode.Escape ) )
 			.Subscribe( _ => Application.Quit() )
 		;
 
-		const float speed		= 5;
+		const float speed				= 5;
 
-		_playerView.Init( speed );
-
-	    PlayerModel model				= new PlayerModel();
+	    PlayerModel model				= new PlayerModel( speed );
 		PlayerController controller		= new PlayerController( model, _playerView );
 	}
 

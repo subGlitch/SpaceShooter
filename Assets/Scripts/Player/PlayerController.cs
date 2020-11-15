@@ -26,8 +26,9 @@ public class PlayerController
 		// Init Player Controls
 		BindKeys();
 
-		// Refresh View's direction
+		// Bind View
 		_view.Direction		= MergeKeys();
+		_view.Speed			= _model.Speed.ToReadOnlyReactiveProperty();
 
 		// Refresh Model's position
 		Observable.EveryFixedUpdate()

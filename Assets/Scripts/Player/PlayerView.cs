@@ -15,18 +15,9 @@ public class PlayerView : MonoBehaviour
 	public ReadOnlyReactiveProperty< float >			Speed;
 
 
-	float	_speed;
-
-	public void Init( float speed )
-	{
-		_speed		= speed;
-	}
-
-
 	void FixedUpdate()
 	{
-		// _rb.velocity		= (Vector2)Direction.Value * Speed.Value;
-		_rb.velocity		= (Vector2)Direction.Value * _speed;
+		_rb.velocity		= (Vector2)Direction.Value * Speed.Value;
 	}
 }
 
