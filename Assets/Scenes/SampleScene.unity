@@ -245,7 +245,8 @@ GameObject:
   - component: {fileID: 364397690}
   - component: {fileID: 364397693}
   - component: {fileID: 364397692}
-  m_Layer: 0
+  - component: {fileID: 364397694}
+  m_Layer: 10
   m_Name: Asteroid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -333,7 +334,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 3f9b022c8c9494f40bf581c3575ce2a6, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -354,6 +355,19 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.17
+--- !u!114 &364397694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 364397689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0f10db1e53b67f4b9be85172d06b3d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rb: {fileID: 364397692}
 --- !u!1 &1110441345
 GameObject:
   m_ObjectHideFlags: 0
@@ -597,7 +611,7 @@ GameObject:
   - component: {fileID: 1617257066}
   - component: {fileID: 1617257065}
   - component: {fileID: 1617257064}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player Ship
   m_TagString: Untagged
   m_Icon: {fileID: 0}
