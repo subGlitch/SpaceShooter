@@ -7,8 +7,17 @@ using Random = UnityEngine.Random;
 
 public class LevelController : MB_Singleton< LevelController >
 {
-	const float BaseSpeed		= 5;
-	const float AddonSpeed		= 4;
+#region Settings
+
+	const float ShipSpeed					= 5;
+
+	const float AsteroidBaseSpeed			= 5;
+	const float AsteroidAddonSpeed			= 4;
+
+	const float AsteroidSpawnAreaExpand		= 1;
+	const float AsteroidSpawnRightShift		= 1;
+
+#endregion
 
 
 	HashSet< AsteroidController >		_asteroids		= new HashSet< AsteroidController >();
@@ -46,15 +55,13 @@ public class LevelController : MB_Singleton< LevelController >
 
 	void SpawnShip()
 	{
-		const float speed				= 5;
-
 		ShipView view					= Instantiate(
 														Refs.Instance.ShipViewPrefab,
 														Refs.Instance.ShipSpawnPos.position,
 														Refs.Instance.ShipViewPrefab.transform.rotation,
 														Refs.Instance.Gameplay
 		);
-	    ShipModel model					= new ShipModel( speed );
+	    ShipModel model					= new ShipModel( ShipSpeed );
 		ShipController controller		= new ShipController( model, view );
 
 		UiControllers.HudController.BindShipModel( model );
@@ -65,21 +72,18 @@ public class LevelController : MB_Singleton< LevelController >
 
 	void SpawnAsteroid()
 	{
-		const float expand			= 1;
-		const float shiftRight		= 1;
-
-		Vector2 expandOffset		= Vector2.up * Boundaries.Rect.height * expand * .5f;
+		Vector2 expandOffset		= Vector2.up * Boundaries.Rect.height * AsteroidSpawnAreaExpand * .5f;
 		Vector2 position			=
 										Vector2.Lerp(
 														Boundaries.x1y0	- expandOffset,
 														Boundaries.Max	+ expandOffset,
 														Random.value
 										) +
-										Vector2.right * shiftRight
+										Vector2.right * AsteroidSpawnRightShift
 		;
 
-		Vector2 baseVelocity		= Vector2.left * BaseSpeed;
-		Vector2 addonVelocity		= Random.insideUnitCircle * AddonSpeed;
+		Vector2 baseVelocity		= Vector2.left * AsteroidBaseSpeed;
+		Vector2 addonVelocity		= Random.insideUnitCircle * AsteroidAddonSpeed;
 		Vector2 velocity			= baseVelocity + addonVelocity;
 
 		AsteroidView view			= Instantiate(
