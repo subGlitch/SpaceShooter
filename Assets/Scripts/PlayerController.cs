@@ -13,7 +13,8 @@ public class PlayerController
 	DirKeyState		_keyLeft		= new DirKeyState( KeyCode.A,	Vector2Int.left		);
 	DirKeyState		_keyUp			= new DirKeyState( KeyCode.W,	Vector2Int.up		);
 	DirKeyState		_keyDown		= new DirKeyState( KeyCode.S,	Vector2Int.down		);
-	Vector2Int		Dir				=> (Vector2Int) _keyRight + _keyLeft + _keyUp + _keyDown;
+
+	ReadOnlyReactiveProperty< Vector2Int > Dir;
 
 
 	public PlayerController( PlayerModel model, PlayerView view )
@@ -24,10 +25,10 @@ public class PlayerController
 		// Player Control
 		BindKeys();
 		Observable.EveryUpdate()
-			.Subscribe( _ => _view.SetVelocity( Dir ) )
+			.Subscribe( _ => _view.SetVelocity( Dir.Value ) )
 		;
 		Observable.EveryFixedUpdate()
-			.Subscribe( _ => _view.SetVelocity( Dir ) )
+			.Subscribe( _ => _view.SetVelocity( Dir.Value ) )
 		;
 
 		// Refresh Model's position
@@ -43,6 +44,21 @@ public class PlayerController
 		BindKey( _keyLeft	);
 		BindKey( _keyUp		);
 		BindKey( _keyDown	);
+
+		Dir		= Observable.Merge(
+					_keyRight	.Value,
+					_keyLeft	.Value,
+					_keyUp		.Value,
+					_keyDown	.Value
+				)
+				.Select( x =>
+					_keyRight	.Value.Value +
+					_keyLeft	.Value.Value +
+					_keyUp		.Value.Value +
+					_keyDown	.Value.Value
+				)
+				.ToReadOnlyReactiveProperty()
+		;
 	}
 
 

@@ -1,18 +1,30 @@
-﻿using UnityEngine;
+﻿using UniRx;
+using UnityEngine;
 
 
 public class DirKeyState : KeyState
 {
+	public ReadOnlyReactiveProperty< Vector2Int >	Value;
+
+
 	public Vector2Int Dir { get; }
 
 
 	public DirKeyState( KeyCode keyCode, Vector2Int dir )
 		: base( keyCode )
 	{
-		Dir		= dir;
+		Dir			= dir;
 	}
 
 
-	public static implicit operator Vector2Int ( DirKeyState x )		=> x.Dir * (x.IsPressed.Value ? 1 : 0);
+	public override void Init( ReadOnlyReactiveProperty<bool> isPressed )
+	{
+		base.Init( isPressed );
+
+		Value		= IsPressed
+						.Select( x => Dir * x.ToInt() )
+						.ToReadOnlyReactiveProperty()
+		;
+	}
 }
 
