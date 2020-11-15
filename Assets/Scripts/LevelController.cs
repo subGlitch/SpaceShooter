@@ -20,18 +20,21 @@ public class LevelController : MonoBehaviour
 	void Start()
 	{
 	    Observable
-			.Interval( TimeSpan.FromSeconds( 1 ))
+			.Interval( TimeSpan.FromSeconds( .5f ))
 			.Subscribe( _ => Spawn() );
 	}
 
 
 	void Spawn()
 	{
+		float y01					= Random.value;
+		Vector2 position			= Vector2.Lerp( Boundaries.x1y0, Boundaries.Max, y01 );
+
 		Vector2 baseVelocity		= Vector2.left * BaseSpeed;
 		Vector2 addonVelocity		= Random.insideUnitCircle * AddonSpeed;
 		Vector2 velocity			= baseVelocity + addonVelocity;
 
-		AsteroidView asteroid		= Instantiate( _prefab );
+		AsteroidView asteroid		= Instantiate( _prefab, position, Quaternion.identity );
 
 		asteroid.Init( velocity );
 	}
