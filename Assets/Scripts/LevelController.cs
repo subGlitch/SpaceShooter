@@ -11,13 +11,6 @@ public class LevelController : MB_Singleton< LevelController >
 	const float AddonSpeed		= 4;
 
 
-#pragma warning disable 0649
-
-	[SerializeField] AsteroidView		_prefab;
-
-#pragma warning restore 0649
-
-
 	HashSet< AsteroidController >		_asteroids		= new HashSet< AsteroidController >();
 
 
@@ -63,7 +56,7 @@ public class LevelController : MB_Singleton< LevelController >
 		Vector2 addonVelocity		= Random.insideUnitCircle * AddonSpeed;
 		Vector2 velocity			= baseVelocity + addonVelocity;
 
-		AsteroidView view			= Instantiate( _prefab, position, Quaternion.identity );
+		AsteroidView view			= Instantiate( Refs.Instance.AsteroidViewPrefab, position, Quaternion.identity );
 
 		AsteroidController controller		= new AsteroidController( view );
 		controller.OnDestroy		+= x => _asteroids.Remove( x );
