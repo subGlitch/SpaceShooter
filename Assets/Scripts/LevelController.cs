@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 
-public class LevelController : MonoBehaviour
+public class LevelController : MB_Singleton< LevelController >
 {
 	const float BaseSpeed		= 5;
 	const float AddonSpeed		= 4;
@@ -17,11 +18,23 @@ public class LevelController : MonoBehaviour
 #pragma warning restore 0649
 
 
+	HashSet< AsteroidController >		_asteroids		= new HashSet< AsteroidController >();
+
+
 	void Start()
 	{
 	    Observable
 			.Interval( TimeSpan.FromSeconds( .25f ))
 			.Subscribe( _ => Spawn() );
+	}
+
+
+	public void CloseLevel()
+	{
+		foreach (AsteroidController asteroid in _asteroids)
+			asteroid.DestroySilently();
+
+		_asteroids.Clear();
 	}
 
 
@@ -47,8 +60,11 @@ public class LevelController : MonoBehaviour
 		AsteroidView view			= Instantiate( _prefab, position, Quaternion.identity );
 
 		AsteroidController controller		= new AsteroidController( view );
+		controller.OnDestroy		+= x => _asteroids.Remove( x );
 
 		view.Init( velocity );
+
+		_asteroids.Add( controller );
 	}
 }
 
