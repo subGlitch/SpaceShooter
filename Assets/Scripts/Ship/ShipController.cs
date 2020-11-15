@@ -39,6 +39,11 @@ public class ShipController
 									.ToReadOnlyReactiveProperty();
 		triggerView.AsteroidCollisions
 			.Subscribe( _ => model.TakeDamage() );
+		model.OnDestroyed	+= () =>
+		{
+			GameObject.Destroy( _view.gameObject );
+			GameObject.Destroy( _triggerView.gameObject );
+		};
 	}
 
 	

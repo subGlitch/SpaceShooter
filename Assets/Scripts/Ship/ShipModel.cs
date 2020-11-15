@@ -1,9 +1,13 @@
-﻿using UniRx;
+﻿using System;
+using UniRx;
 using UnityEngine;
 
 
 public class ShipModel
 {
+	public event Action		OnDestroyed;
+
+
 	public ReactiveProperty< int >					Hull		{ get; }
 	public ReactiveProperty< float >				Speed		{ get; }
 
@@ -20,6 +24,9 @@ public class ShipModel
 	public void TakeDamage()
 	{
 		Hull.Value --;
+
+		if (Hull.Value <= 0)
+			OnDestroyed?.Invoke();
 	}
 }
 
