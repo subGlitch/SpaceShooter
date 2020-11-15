@@ -12,7 +12,13 @@ public class KeyState
 
 	public KeyState( KeyCode keyCode )
 	{
-		KeyCode		= keyCode;
+		KeyCode			= keyCode;
+	}
+
+
+	public void Init( ReadOnlyReactiveProperty< bool > isPressed )
+	{
+		IsPressed		= isPressed;
 	}
 }
 

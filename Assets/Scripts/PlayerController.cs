@@ -50,7 +50,7 @@ public class PlayerController
 	{
 		KeyCode keyCode			= keyState.KeyCode;
 
-		keyState.IsPressed		= Observable.EveryUpdate()
+		var isPressed			= Observable.EveryUpdate()
 									.Where( _ =>
 										Input.GetKeyDown	( keyCode ) ||
 										Input.GetKeyUp		( keyCode )
@@ -60,6 +60,8 @@ public class PlayerController
 									)
 									.ToReadOnlyReactiveProperty()
 		;
+
+		keyState.Init( isPressed );
 	}
 }
 
