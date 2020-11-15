@@ -3,48 +3,36 @@
 
 public class Boundaries : MonoBehaviour
 {
+	static Rect		_rect;
+
+
+	public static Vector2 Min		=> _rect.min;
+	public static Vector2 Max		=> _rect.max;
+	public static Vector2 x0y1		=> new Vector2( _rect.xMin, _rect.yMax );
+	public static Vector2 x1y0		=> new Vector2( _rect.xMax, _rect.yMin );
+
+
 	void Start()
 	{
-		Rect rect		= GetComponent< RectTransform >().GetWorldRect();
+		_rect		= GetComponent< RectTransform >().GetWorldRect();
 
-		// Top
-		CreateEdgeCollider( rect,
-			new Vector2( -1, 1 ),
-			new Vector2( +1, 1 )
-		);
-
-		// Bottom
-		CreateEdgeCollider( rect,
-			new Vector2( -1, -1 ),
-			new Vector2( +1, -1 )
-		);
-
-		// Left
-		CreateEdgeCollider( rect,
-			new Vector2( -1, -1 ),
-			new Vector2( -1, +1 )
-		);
-
-		// Right
-		CreateEdgeCollider( rect,
-			new Vector2( 1, -1 ),
-			new Vector2( 1, +1 )
-		);
+		CreateEdgeCollider( x0y1, Max );		// Top
+		CreateEdgeCollider( Min, x1y0 );		// Bottom
+		CreateEdgeCollider( Min, x0y1 );		// Left
+		CreateEdgeCollider( x1y0, Max );		// Right
 	}
 
 
-	void CreateEdgeCollider( Rect rect, Vector2 p0, Vector2 p1 )
+	void CreateEdgeCollider( Vector2 p0, Vector2 p1 )
 	{
-		var col				= new GameObject( "Edge collider" ).AddComponent< EdgeCollider2D >();
-		col.gameObject.layer		= 8; // Boundaries
+		var col						= new GameObject( "Edge collider" ).AddComponent< EdgeCollider2D >();
+		col.gameObject.layer		= 8;		// Boundaries layer
 		col.transform.SetParent( transform );
 
 		var points			= col.points;
 
-		Vector2 center		= rect.center;
-		Vector2 halfSize	= rect.size * .5f;
-		points[ 0 ]			= center + halfSize * p0;
-		points[ 1 ]			= center + halfSize * p1;
+		points[ 0 ]			= p0;
+		points[ 1 ]			= p1;
 
 		// (!) Important, otherwise actual points wont be updated
 		col.points			= points;
