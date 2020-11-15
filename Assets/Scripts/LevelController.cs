@@ -45,7 +45,7 @@ public class LevelController : MB_Singleton< LevelController >
 	    ShipModel model					= new ShipModel( speed );
 		ShipController controller		= new ShipController( model, view );
 
-		model.Hull.Subscribe( x => Refs.Instance.HudView.SetHull( x ) );
+		HudController.BindShipModel( model );
 
 		model.OnDestroyed				+= () => Refs.Instance.PopupPanelView.SetActive( true );
 	}
