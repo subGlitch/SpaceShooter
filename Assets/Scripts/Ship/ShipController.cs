@@ -5,7 +5,7 @@ using UnityEngine;
 public class ShipController
 {
 	ShipView			_view;
-	ShipTriggerView	_triggerView;
+	ShipTriggerView		_triggerView;
 	ShipModel			_model;
 
 
@@ -25,8 +25,10 @@ public class ShipController
 		_triggerView		= triggerView;
 		_model				= model;
 
+
 		// Init Player Controls
 		BindKeys();
+
 
 		// Bind View
 		view.Direction		= MergeKeys();
@@ -41,8 +43,8 @@ public class ShipController
 			.Subscribe( _ => model.TakeDamage() );
 		model.OnDestroyed	+= () =>
 		{
-			GameObject.Destroy( _view.gameObject );
-			GameObject.Destroy( _triggerView.gameObject );
+			GameObject.Destroy( _view			.gameObject );
+			GameObject.Destroy( _triggerView	.gameObject );
 		};
 	}
 
