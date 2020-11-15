@@ -11,8 +11,11 @@ public class PlayerView : MonoBehaviour
 #pragma warning restore 0649
 
 
-	public ReadOnlyReactiveProperty< Vector2Int >		Direction;
-	public ReadOnlyReactiveProperty< float >			Speed;
+	public ReadOnlyReactiveProperty< Vector2Int >	Direction;
+	public ReadOnlyReactiveProperty< float >		Speed;
+
+
+	public Vector2 Position		=> transform.position;
 
 
 	void FixedUpdate()

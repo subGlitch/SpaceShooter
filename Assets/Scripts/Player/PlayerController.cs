@@ -30,9 +30,10 @@ public class PlayerController
 		_view.Direction		= MergeKeys();
 		_view.Speed			= _model.Speed.ToReadOnlyReactiveProperty();
 
-		// Refresh Model's position
-		Observable.EveryFixedUpdate()
-			.Subscribe( _ => _model.RefreshPosition( _view.transform.position ) );
+		// Bind Model
+		_model.Position		= Observable.EveryFixedUpdate()
+								.Select( _ => _view.Position )
+								.ToReadOnlyReactiveProperty();
 	}
 
 	
