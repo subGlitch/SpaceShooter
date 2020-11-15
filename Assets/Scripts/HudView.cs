@@ -9,5 +9,11 @@ public class HudView : MonoBehaviour
 	[SerializeField] Text		_hull;
 
 #pragma warning restore 0649
+
+
+	public void SetHull( int hull )
+	{
+		_hull.text		= $"Hull: { hull }";
+	}
 }
 

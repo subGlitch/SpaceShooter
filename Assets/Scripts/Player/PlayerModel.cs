@@ -20,8 +20,6 @@ public class PlayerModel
 	public void TakeDamage()
 	{
 		Hull.Value --;
-
-		Debug.Log( "Damage Taken" );
 	}
 }
 

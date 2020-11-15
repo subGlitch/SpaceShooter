@@ -6,6 +6,7 @@ public class GameController : MonoBehaviour
 {
 	public PlayerView			_playerView;
 	public PlayerTriggerView	_playerTriggerView;
+	public HudView				_hudView;
 
 
 	void Start()
@@ -22,6 +23,8 @@ public class GameController : MonoBehaviour
 
 	    PlayerModel model				= new PlayerModel( speed );
 		PlayerController controller		= new PlayerController( model, _playerView, _playerTriggerView );
+
+		model.Hull.Subscribe( x => _hudView.SetHull( x ) );
 	}
 
 
