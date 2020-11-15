@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class ShipController
 {
-	ShipView	_view;
-	ShipModel	_model;
-
-
 #region Keyboard Controls
 
 	DirKeyState		_keyRight		= new DirKeyState( KeyCode.D,	Vector2Int.right	);
@@ -20,10 +16,6 @@ public class ShipController
 
 	public ShipController( ShipModel model, ShipView view, CollidableView triggerView )
 	{
-		_view		= view;
-		_model		= model;
-
-
 		// Init Player Controls
 		BindKeys();
 
@@ -42,7 +34,7 @@ public class ShipController
 			triggerView.Collisions
 					.Subscribe( _ => model.TakeDamage() );
 
-			model.OnDestroyed		+= () => GameObject.Destroy( _view.gameObject );
+			model.OnDestroyed		+= () => GameObject.Destroy( view.gameObject );
 		}
 	}
 
