@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UniRx;
+using UnityEngine;
 
 
 public class PlayerView : MonoBehaviour
@@ -10,9 +11,11 @@ public class PlayerView : MonoBehaviour
 #pragma warning restore 0649
 
 
-	float			_speed;
-	Vector2Int		_dir;
+	public ReadOnlyReactiveProperty< Vector2Int >		Direction;
+	public ReadOnlyReactiveProperty< float >			Speed;
 
+
+	float	_speed;
 
 	public void Init( float speed )
 	{
@@ -20,15 +23,10 @@ public class PlayerView : MonoBehaviour
 	}
 
 
-	public void SetDirection( Vector2Int dir )
-	{
-		_dir		= dir;
-	}
-
-
 	void FixedUpdate()
 	{
-		_rb.velocity		= (Vector2)_dir * _speed;
+		// _rb.velocity		= (Vector2)Direction.Value * Speed.Value;
+		_rb.velocity		= (Vector2)Direction.Value * _speed;
 	}
 }
 
