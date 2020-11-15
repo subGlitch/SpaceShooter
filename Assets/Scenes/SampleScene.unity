@@ -153,7 +153,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _shipView: {fileID: 1617257064}
-  _shipTriggerView: {fileID: 1578779912}
   _hudView: {fileID: 255631354}
   _popupPanelView: {fileID: 1606344372}
 --- !u!4 &20393564
@@ -1009,6 +1008,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rb: {fileID: 1617257065}
+  _trigger: {fileID: 1578779912}
 --- !u!50 &1617257065
 Rigidbody2D:
   serializedVersion: 4

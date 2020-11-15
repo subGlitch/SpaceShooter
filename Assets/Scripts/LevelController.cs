@@ -29,6 +29,12 @@ public class LevelController : MB_Singleton< LevelController >
 	}
 
 
+	public void StartLevel()
+	{
+		
+	}
+
+
 	public void CloseLevel()
 	{
 		foreach (AsteroidController asteroid in _asteroids)

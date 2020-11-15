@@ -7,6 +7,7 @@ public class ShipView : MonoBehaviour
 #pragma warning disable 0649
 
 	[SerializeField] Rigidbody2D		_rb;
+	[SerializeField] CollidableView		_trigger;
 
 #pragma warning restore 0649
 
@@ -15,7 +16,9 @@ public class ShipView : MonoBehaviour
 	public ReadOnlyReactiveProperty< float >		Speed;
 
 
-	public Vector2 Position		=> transform.position;
+	public Vector2								Position		=> transform.position;
+	public System.IObservable< Collider2D >		Collisions		=> _trigger.Collisions;
+
 
 
 	void FixedUpdate()

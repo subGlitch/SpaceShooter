@@ -14,7 +14,7 @@ public class ShipController
 #endregion
 
 
-	public ShipController( ShipModel model, ShipView view, CollidableView triggerView )
+	public ShipController( ShipModel model, ShipView view )
 	{
 		// Init Player Controls
 		BindKeys();
@@ -31,7 +31,7 @@ public class ShipController
 											.Select( _ => view.Position )
 											.ToReadOnlyReactiveProperty();
 
-			triggerView.Collisions
+			view.Collisions
 					.Subscribe( _ => model.TakeDamage() );
 
 			model.OnDestroyed		+= () => GameObject.Destroy( view.gameObject );
