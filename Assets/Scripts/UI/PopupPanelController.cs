@@ -22,14 +22,12 @@ public class PopupPanelController
 
 
 	public void OpenPanel()
-	{
+	=>
 		PanelSetActive( true );
-	}
 
 
 	void PanelSetActive( bool active )
-	{
+	=>
 		_view.gameObject.SetActive( active );
-	}
 }
 

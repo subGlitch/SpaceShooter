@@ -8,8 +8,7 @@ public class PopupPanelView : MonoBehaviour
 
 
 	public void Restart()
-	{
+	=>
 		OnRestart?.Invoke();
-	}
 }
 
