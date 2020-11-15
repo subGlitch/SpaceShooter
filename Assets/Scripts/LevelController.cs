@@ -28,12 +28,19 @@ public class LevelController : MB_Singleton< LevelController >
 	}
 
 
-	public void CloseLevel()
+	void ClearLevel()
 	{
 		foreach (AsteroidController asteroid in _asteroids)
 			asteroid.DestroySilently();
 
 		_asteroids.Clear();
+	}
+
+
+	public void RestartLevel()
+	{
+		ClearLevel();
+		StartLevel();
 	}
 
 

@@ -19,7 +19,9 @@ public class HudView : MonoBehaviour
 
 	public void OnOK()
 	{
-		LevelController.Instance.CloseLevel();
+		LevelController.Instance.RestartLevel();
+
+		gameObject.SetActive( false );
 	}
 }
 
