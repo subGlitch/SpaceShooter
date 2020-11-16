@@ -11,7 +11,7 @@ public class MapView : UiViewBase
 	public IObservable< int > LocationSelect;
 
 
-	void Start()
+	void Awake()
 	{
 		LocationSelect			= Observable.Empty< int >();
 
@@ -26,13 +26,6 @@ public class MapView : UiViewBase
 													LocationSelect,
 													location.PressEvents.Select( _ => copy )
 			);
-
-			MapLocationState state		=
-											i <= 1 ? MapLocationState.Completed :
-											i == 2 ? MapLocationState.Available :
-											MapLocationState.Locked
-			;
-			location.SetState( state );
 		}
 	}
 }

@@ -3,27 +3,44 @@
 
 public class MapController
 {
+	MapView		_view;
+	MapModel	_model;
+
+
 	public MapController( MapModel model, MapView view )
 	{
-		int maxCompleted		= model.MaxCompleted;
+		_view		= view;
+		_model		= model;
 
-		for (int i = 0; i < view.Locations.Count; i ++)
-		{
-			MapLocationState state		=
-											i <= maxCompleted ? MapLocationState.Completed :
-											i == maxCompleted + 1 ? MapLocationState.Available :
-											MapLocationState.Locked
-			;
-
-			view.Locations[ i ].SetState( state );
-		}
-
-
+		// Subscribe to Location Select
 		view.LocationSelect.Subscribe( levelIndex =>
 		{
 			view.SetActive( false );
 			LevelController.Instance.StartLevel( levelIndex );
 		});
+
+		// Subscribe to LevelCompleted events
+		LevelController.Instance.LevelCompletedEvents.Subscribe( model.OnLevelCompleted );
+
+		// Refresh Map when MaxCompleted changes
+		model.MaxCompleted.Subscribe( _ => RefreshView() );
+	}
+
+
+	void RefreshView()
+	{
+		int maxCompleted		= _model.MaxCompleted.Value;
+
+		for (int i = 0; i < _view.Locations.Count; i ++)
+		{
+			MapLocationState state		=
+											i <= maxCompleted		?	MapLocationState.Completed :
+											i == maxCompleted + 1	?	MapLocationState.Available :
+																		MapLocationState.Locked
+			;
+
+			_view.Locations[ i ].SetState( state );
+		}
 	}
 }
 

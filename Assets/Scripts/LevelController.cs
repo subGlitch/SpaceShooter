@@ -35,6 +35,9 @@ public class LevelController : MB_Singleton< LevelController >
 #endregion
 
 
+	public Subject< int >	LevelCompletedEvents		= new Subject< int >();
+
+
 	static int	_asteroidsOnScreen;
 
 
@@ -46,6 +49,7 @@ public class LevelController : MB_Singleton< LevelController >
 	IDisposable		_timer;
 
 	LevelState		_state;
+	int				_levelIndex;
 
 
 	public ReactiveProperty< float >	TimerEndTime		= new ReactiveProperty< float >();
@@ -89,6 +93,7 @@ public class LevelController : MB_Singleton< LevelController >
 
 			case LevelState.Win:
 				UiControllers.PopupPanelController.OpenPanel( true );
+				LevelCompletedEvents.OnNext( _levelIndex );
 				break;
 		}
 	}
@@ -115,6 +120,7 @@ public class LevelController : MB_Singleton< LevelController >
 
 	public void StartLevel( int levelIndex )
 	{
+		_levelIndex					= levelIndex;
 		LevelConfig levelConfig		= Refs.Instance.Settings.Levels[ levelIndex ];
 
 		Random.InitState( levelConfig.Seed );

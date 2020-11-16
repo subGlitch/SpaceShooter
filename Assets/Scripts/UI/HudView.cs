@@ -30,6 +30,7 @@ public class HudView : UiViewBase
 	public void SetTimerEndTime( float timerEndTime )
 	{
 		_timerEndTime	= timerEndTime;
+		UpdateTimerText();
 	}
 
 
