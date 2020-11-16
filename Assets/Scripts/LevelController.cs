@@ -22,6 +22,8 @@ public class LevelController : MB_Singleton< LevelController >
 
 	HashSet< ADestroyable >	_spaceObjects		= new HashSet< ADestroyable >();
 
+	ShipModel	_ship;
+
 
 	void Start()
 	{
@@ -54,6 +56,24 @@ public class LevelController : MB_Singleton< LevelController >
 	}
 
 
+	public void SpawnBullet()
+	{
+		// Create
+		BulletView view					= Instantiate(
+														Refs.Instance.BulletViewPrefab,
+														_ship.Position.Value,
+														Quaternion.identity,
+														Refs.Instance.Gameplay
+		);
+	    BulletModel model				= new BulletModel();
+		BulletController controller		= new BulletController( view );
+
+
+		// Bookkeeping
+		Register( controller );
+	}
+
+
 	void SpawnShip()
 	{
 		// Create
@@ -73,6 +93,7 @@ public class LevelController : MB_Singleton< LevelController >
 
 
 		// Bookkeeping
+		_ship							= model;
 		Register( controller );
 	}
 

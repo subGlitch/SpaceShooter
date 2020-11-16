@@ -24,6 +24,10 @@ public class ShipController : ADestroyable
 
 		// Init Player Controls
 		BindKeys();
+		Observable
+			.EveryUpdate()
+			.Where( _ => Input.GetMouseButtonDown( 0 ))
+			.Subscribe( _ => LevelController.Instance.SpawnBullet() );
 
 
 		// Bind View

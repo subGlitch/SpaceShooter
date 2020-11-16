@@ -6,6 +6,7 @@ public class Refs : MB_Singleton< Refs >
 	[Header( "Prefabs" )]
 	public ShipView			ShipViewPrefab;
 	public AsteroidView		AsteroidViewPrefab;
+	public BulletView		BulletViewPrefab;
 
 	[Header( "Refs" )]
 	public Transform		ShipSpawnPos;
