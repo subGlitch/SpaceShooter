@@ -41,14 +41,47 @@ public class LevelController : MB_Singleton< LevelController >
 	ShipModel		_ship;
 
 	IDisposable		_asteroidSpawner;
+	IDisposable		_timer;
 
+	LevelState		_state;
 
 
 	public void ChangeAsteroidsOnScreenCount( int delta )
 	{
 		_asteroidsOnScreen		+= delta;
+
+		if (
+				_asteroidsOnScreen == 0 &&
+				_state == LevelState.TimeOut
+			)
+			Transition( LevelState.Win );
 	}
 
+
+	void Transition( LevelState state )
+	{
+		_state		= state;
+
+		switch (state)
+		{
+			case LevelState.InProcess:
+				break;
+
+			case LevelState.TimeOut:
+				_asteroidSpawner.Dispose();
+				if (_asteroidsOnScreen == 0)
+					Transition( LevelState.Win );
+				break;
+
+			case LevelState.Fail:
+				UiControllers.PopupPanelController.OpenPanel();
+				break;
+
+			case LevelState.Win:
+				UiControllers.PopupPanelController.OpenPanel();
+				break;
+		}
+	}
 
 
 	public void StartLevel()
@@ -58,6 +91,12 @@ public class LevelController : MB_Singleton< LevelController >
 		_asteroidSpawner		= Observable
 									.Interval( TimeSpan.FromSeconds( AsteroidsSpawnRate ))
 									.Subscribe( _ => SpawnAsteroid() );
+
+		_timer					= Observable
+									.Timer( TimeSpan.FromSeconds( 10 ))
+									.Subscribe( _ => Transition( LevelState.TimeOut ) );
+
+		Transition( LevelState.InProcess );
 	}
 
 
@@ -67,7 +106,8 @@ public class LevelController : MB_Singleton< LevelController >
 			spaceObject.DestroySilently();
 		_spaceObjects.Clear();
 
-		_asteroidSpawner.Dispose();
+		_asteroidSpawner	.Dispose();
+		_timer				.Dispose();
 
 		_ship		= null;
 	}
@@ -100,7 +140,7 @@ public class LevelController : MB_Singleton< LevelController >
 
 		// Bind
 		UiControllers.HudController.BindShipModel( factory.Model );
-		factory.Controller.OnDestroy		+= x => UiControllers.PopupPanelController.OpenPanel();
+		factory.Controller.OnDestroy		+= x => Transition( LevelState.Fail );
 
 
 		// Bookkeeping
