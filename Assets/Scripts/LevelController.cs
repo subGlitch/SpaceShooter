@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -30,8 +29,6 @@ public class LevelController : MB_Singleton< LevelController >
 
 	const float BulletsSpeed				= 10;
 
-	const float LevelTime					= 10;
-
 #endregion
 
 
@@ -40,8 +37,6 @@ public class LevelController : MB_Singleton< LevelController >
 
 	static int	_asteroidsOnScreen;
 
-
-	HashSet< ADestroyableController >	_spaceObjects		= new HashSet< ADestroyableController >();
 
 	ShipModel		_ship;
 
@@ -152,9 +147,7 @@ public class LevelController : MB_Singleton< LevelController >
 
 	void ClearLevel()
 	{
-		foreach (ADestroyableController spaceObject in _spaceObjects)
-			spaceObject.DestroySilently();
-		_spaceObjects.Clear();
+		Bookkeeper.Clear();
 
 		_asteroidSpawner	.Dispose();
 		_timer				.Dispose();
@@ -171,7 +164,7 @@ public class LevelController : MB_Singleton< LevelController >
 		factory.Model.Fire( Vector2.right * BulletsSpeed );
 
 		// Bookkeeping
-		Register( factory.Controller );
+		Bookkeeper.Register( factory.Controller );
 	}
 
 
@@ -188,7 +181,7 @@ public class LevelController : MB_Singleton< LevelController >
 
 		// Bookkeeping
 		_ship		= factory.Model;
-		Register( factory.Controller );
+		Bookkeeper.Register( factory.Controller );
 	}
 
 
@@ -218,15 +211,7 @@ public class LevelController : MB_Singleton< LevelController >
 
 
 		// Bookkeeping
-		Register( factory.Controller );
-	}
-
-
-	void Register( ADestroyableController controller )
-	{
-		_spaceObjects.Add( controller );
-
-		controller.OnDestroy		+= x => _spaceObjects.Remove( x );
+		Bookkeeper.Register( factory.Controller );
 	}
 }
 
