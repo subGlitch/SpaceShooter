@@ -30,6 +30,8 @@ public class LevelController : MB_Singleton< LevelController >
 
 	const float BulletsSpeed				= 10;
 
+	const float LevelTime					= 10;
+
 #endregion
 
 
@@ -103,7 +105,7 @@ public class LevelController : MB_Singleton< LevelController >
 									.Subscribe( _ => SpawnAsteroid() );
 
 
-		float time				= 10;
+		float time				= LevelTime;
 		TimerEndTime.Value		= Time.time + time;
 
 		_timer					= Observable
