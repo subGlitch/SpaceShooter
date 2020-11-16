@@ -56,6 +56,7 @@ public class LevelController : MB_Singleton< LevelController >
 
 	void SpawnShip()
 	{
+		// Create
 		ShipView view					= Instantiate(
 														Refs.Instance.ShipViewPrefab,
 														Refs.Instance.ShipSpawnPos.position,
@@ -65,16 +66,20 @@ public class LevelController : MB_Singleton< LevelController >
 	    ShipModel model					= new ShipModel( ShipSpeed );
 		ShipController controller		= new ShipController( model, view );
 
+
+		// Bind
 		UiControllers.HudController.BindShipModel( model );
+		controller.OnDestroy			+= x => UiControllers.PopupPanelController.OpenPanel();
 
-		model.OnDestroyed				+= () => UiControllers.PopupPanelController.OpenPanel();
 
-		Add( controller );
+		// Bookkeeping
+		Register( controller );
 	}
 
 
 	void SpawnAsteroid()
 	{
+		// Calc
 		Vector2 expandOffset		= Vector2.up * Boundaries.Rect.height * AsteroidSpawnAreaExpand * .5f;
 		Vector2 position			=
 										Vector2.Lerp(
@@ -84,27 +89,31 @@ public class LevelController : MB_Singleton< LevelController >
 										) +
 										Vector2.right * AsteroidSpawnRightShift
 		;
-
 		Vector2 baseVelocity		= Vector2.left * AsteroidBaseSpeed;
 		Vector2 addonVelocity		= Random.insideUnitCircle * AsteroidAddonSpeed;
 		Vector2 velocity			= baseVelocity + addonVelocity;
 
+
+		// Create
 		AsteroidView view			= Instantiate(
 													Refs.Instance.AsteroidViewPrefab,
 													position,
 													Quaternion.identity,
 													Refs.Instance.Gameplay
 		);
-
 		AsteroidController controller		= new AsteroidController( view );
 
+
+		// Launch
 		view.Init( velocity );
 
-		Add( controller );
+
+		// Bookkeeping
+		Register( controller );
 	}
 
 
-	void Add( ADestroyable controller )
+	void Register( ADestroyable controller )
 	{
 		_spaceObjects.Add( controller );
 
