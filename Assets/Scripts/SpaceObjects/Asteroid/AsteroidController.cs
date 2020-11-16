@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class AsteroidController : ADestroyableController
 {
-	static int	_onScreenCounter;
-
-
 	AsteroidView	_view;
 
 
@@ -23,7 +20,7 @@ public class AsteroidController : ADestroyableController
 			switch (col.gameObject.layer)
 			{
 				case Layers.AsteroidsTriggers:
-					Debug.Log( $"_onScreenCounter: { ++ _onScreenCounter }");
+					LevelController.Instance.ChangeAsteroidsOnScreenCount( 1 );
 					break;
 
 				default:
@@ -37,7 +34,7 @@ public class AsteroidController : ADestroyableController
 			switch (col.gameObject.layer)
 			{
 				case Layers.AsteroidsTriggers:
-					Debug.Log( $"_onScreenCounter: { -- _onScreenCounter }");
+					LevelController.Instance.ChangeAsteroidsOnScreenCount( -1 );
 					break;
 			}
 		});

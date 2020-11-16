@@ -5,6 +5,17 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 
+public enum LevelState
+{
+	None,
+
+	InProcess,
+	TimeOut,
+	Fail,
+	Win,
+}
+
+
 public class LevelController : MB_Singleton< LevelController >
 {
 #region Settings
@@ -22,6 +33,9 @@ public class LevelController : MB_Singleton< LevelController >
 #endregion
 
 
+	static int	_asteroidsOnScreen;
+
+
 	HashSet< ADestroyableController >	_spaceObjects		= new HashSet< ADestroyableController >();
 
 	ShipModel		_ship;
@@ -29,12 +43,12 @@ public class LevelController : MB_Singleton< LevelController >
 	IDisposable		_asteroidSpawner;
 
 
-	// Test
-	void Update()
+
+	public void ChangeAsteroidsOnScreenCount( int delta )
 	{
-		if (Input.GetKeyDown( KeyCode.Space ))
-			_asteroidSpawner.Dispose();
+		_asteroidsOnScreen		+= delta;
 	}
+
 
 
 	public void StartLevel()
