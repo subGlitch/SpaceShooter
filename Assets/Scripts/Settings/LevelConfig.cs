@@ -3,7 +3,7 @@ using UnityEngine;
 
 
 [Serializable]
-public struct LevelConfig
+public class LevelConfig
 {
 	public float	Time;
 	public float	AsteroidsRate;

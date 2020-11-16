@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UnityEditor;
+using UnityEngine;
 
 
 public class GameController : MonoBehaviour
@@ -6,10 +7,28 @@ public class GameController : MonoBehaviour
 	void Start()
 	{
 		TechSettings();
+		GenerateRandomParameters();
 
 		UiControllers.Init();
 
 		Refs.Instance.MapView.SetActive( true );
+	}
+
+
+	void GenerateRandomParameters()
+	{
+		Random.InitState( 1 );
+
+		Settings settings		= Refs.Instance.Settings;
+
+		foreach (LevelConfig levelConfig in settings.Levels)
+		{
+			levelConfig.Seed	= Random.Range( int.MinValue, int.MaxValue );
+		}
+
+		#if UNITY_EDITOR
+			// EditorUtility.SetDirty( settings );
+		#endif
 	}
 
 
