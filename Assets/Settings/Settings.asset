@@ -15,16 +15,16 @@ MonoBehaviour:
   Levels:
   - Time: 10
     AsteroidsRate: 0.25
-    Seed: 0
+    Seed: 1543501226
   - Time: 15
     AsteroidsRate: 0.2
-    Seed: 1
+    Seed: 199432970
   - Time: 20
     AsteroidsRate: 0.15
-    Seed: 2
+    Seed: 752298618
   - Time: 25
     AsteroidsRate: 0.1
-    Seed: 3
+    Seed: 138080314
   - Time: 30
     AsteroidsRate: 0.05
-    Seed: 4
+    Seed: 743183922

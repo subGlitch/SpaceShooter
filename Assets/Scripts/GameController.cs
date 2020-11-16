@@ -27,7 +27,7 @@ public class GameController : MonoBehaviour
 		}
 
 		#if UNITY_EDITOR
-			// EditorUtility.SetDirty( settings );
+			EditorUtility.SetDirty( settings );
 		#endif
 	}
 

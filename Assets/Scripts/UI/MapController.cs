@@ -5,8 +5,11 @@ public class MapController
 {
 	public MapController( MapView view )
 	{
-		view.LevelPress
-			.Subscribe( levelIndex => LevelController.Instance.StartLevel( levelIndex ) );
+		view.LocationSelect.Subscribe( levelIndex =>
+		{
+			view.SetActive( false );
+			LevelController.Instance.StartLevel( levelIndex );
+		});
 	}
 }
 

@@ -1,16 +1,37 @@
-﻿using UniRx;
+﻿using System;
+using System.Collections.Generic;
+using UniRx;
+using UnityEngine;
 
 
 public class MapView : UiViewBase
 {
-	public Subject< int > LevelPress		= new Subject< int >();
+#pragma warning disable 0649
+
+	[SerializeField] List< MapLocationView >	_locations;
+
+#pragma warning restore 0649
 
 
-	public void OnLevel( int levelIndex )
+	public IObservable< int > LocationSelect;
+
+
+	void Start()
 	{
-		SetActive( false );
+		LocationSelect			= Observable.Empty< int >();
 
-		LevelPress.OnNext( levelIndex );
+		for (int i = 0; i < _locations.Count; i ++)
+		{
+			var location		= _locations[ i ];
+
+			location.SetLevelNum( i + 1 );
+
+			int copy			= i;						// https://www.jetbrains.com/help/resharper/AccessToModifiedClosure.html
+			LocationSelect		= Observable.Merge(
+													LocationSelect,
+													location.PressEvents.Select( _ => copy )
+			);
+		}
 	}
 }
 
