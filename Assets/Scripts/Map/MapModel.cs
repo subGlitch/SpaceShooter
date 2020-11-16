@@ -1,7 +1,9 @@
-﻿using UniRx;
+﻿using System;
+using UniRx;
 using UnityEngine;
 
 
+[Serializable]
 public class MapModel
 {
 	public ReactiveProperty< int > MaxCompleted		= new ReactiveProperty< int >( -1 );

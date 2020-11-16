@@ -1,20 +1,44 @@
-﻿using UnityEditor;
+﻿using System;
+using UnityEditor;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 
 public class GameController : MonoBehaviour
 {
+	const string SaveFileName		= "save.dat";
+	string SaveFilePath				=> SavingSystem.DefaultPath( SaveFileName );
+	
+
+	MapModel	_mapModel;
+
+
 	void Start()
 	{
 		TechSettings();
 		GenerateRandomParameters();
 
-		MapModel mapModel		= new MapModel();
+		try
+		{
+			LoadGame();
+		}
+		catch
+		{
+			CreateNewGame();
+		}
 
-		UiControllers.Init( mapModel );
+		UiControllers.Init( _mapModel );
 
 		Refs.Instance.MapView.SetActive( true );
 	}
+
+
+	void OnApplicationQuit()		=> SaveGame();
+
+
+	void CreateNewGame()		=> _mapModel		= new MapModel();
+	void LoadGame()				=> _mapModel		= SavingSystem.Deserialize< MapModel >( SaveFilePath );
+	void SaveGame()				=> SavingSystem.Serialize( SaveFilePath, _mapModel );
 
 
 	void GenerateRandomParameters()
