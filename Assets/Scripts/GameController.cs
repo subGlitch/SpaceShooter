@@ -8,8 +8,6 @@ public class GameController : MonoBehaviour
 		TechSettings();
 
 		UiControllers.Init();
-
-		LevelController.Instance.StartLevel();
 	}
 
 
