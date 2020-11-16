@@ -26,7 +26,7 @@ public class Boundaries : MonoBehaviour
 	void CreateEdgeCollider( Vector2 p0, Vector2 p1 )
 	{
 		var col						= new GameObject( "Edge collider" ).AddComponent< EdgeCollider2D >();
-		col.gameObject.layer		= 8;		// Boundaries layer
+		col.gameObject.layer		= Layers.Boundaries;
 		col.transform.SetParent( transform );
 
 		var points			= col.points;
