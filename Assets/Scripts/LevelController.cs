@@ -78,24 +78,17 @@ public class LevelController : MB_Singleton< LevelController >
 	void SpawnShip()
 	{
 		// Create
-		ShipView view					= Instantiate(
-														Refs.Instance.ShipViewPrefab,
-														Refs.Instance.ShipSpawnPos.position,
-														Refs.Instance.ShipViewPrefab.transform.rotation,
-														Refs.Instance.Gameplay
-		);
-	    ShipModel model					= new ShipModel( ShipSpeed );
-		ShipController controller		= new ShipController( model, view );
+		ShipFactory factory			= new ShipFactory( ShipSpeed );
 
 
 		// Bind
-		UiControllers.HudController.BindShipModel( model );
-		controller.OnDestroy			+= x => UiControllers.PopupPanelController.OpenPanel();
+		UiControllers.HudController.BindShipModel( factory.Model );
+		factory.Controller.OnDestroy		+= x => UiControllers.PopupPanelController.OpenPanel();
 
 
 		// Bookkeeping
-		_ship							= model;
-		Register( controller );
+		_ship		= factory.Model;
+		Register( factory.Controller );
 	}
 
 
