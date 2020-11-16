@@ -31,6 +31,16 @@ public class AsteroidController : ADestroyableController
 					break;
 			}
 		});
+
+		view.TriggerExitEvents.Subscribe( col =>
+		{
+			switch (col.gameObject.layer)
+			{
+				case Layers.AsteroidsTriggers:
+					Debug.Log( $"_onScreenCounter: { -- _onScreenCounter }");
+					break;
+			}
+		});
 	}
 
 
