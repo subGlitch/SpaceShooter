@@ -9,6 +9,8 @@ public class HudController
 	public HudController( HudView view )
 	{
 		_view		= view;
+
+		LevelController.Instance.TimerEndTime.Subscribe( t => _view.SetTimerEndTime( t ) );
 	}
 
 

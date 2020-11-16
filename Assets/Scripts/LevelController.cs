@@ -46,6 +46,9 @@ public class LevelController : MB_Singleton< LevelController >
 	LevelState		_state;
 
 
+	public ReactiveProperty< float >	TimerEndTime		= new ReactiveProperty< float >();
+
+
 	public void ChangeAsteroidsOnScreenCount( int delta )
 	{
 		_asteroidsOnScreen		+= delta;
@@ -99,8 +102,12 @@ public class LevelController : MB_Singleton< LevelController >
 									.Interval( TimeSpan.FromSeconds( AsteroidsSpawnRate ))
 									.Subscribe( _ => SpawnAsteroid() );
 
+
+		float time				= 10;
+		TimerEndTime.Value		= Time.time + time;
+
 		_timer					= Observable
-									.Timer( TimeSpan.FromSeconds( 10 ))
+									.Timer( TimeSpan.FromSeconds( time ))
 									.Subscribe( _ => Transition( LevelState.TimeOut ) );
 
 		Transition( LevelState.InProcess );
