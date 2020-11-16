@@ -11,9 +11,11 @@ public class BulletController : ADestroyable
 	{
 		_view		= view;
 
+		// Bind Model
 		model.Velocity.Subscribe( v => _view.SetVelocity( v ) );
 
-		view.Collisions.Subscribe( _ => Destroy() );
+		// Bind View
+		view.TriggerEvents.Subscribe( _ => Destroy() );
 	}
 
 

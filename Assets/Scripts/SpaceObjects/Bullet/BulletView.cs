@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 
-public class BulletView : CollidableView
+public class BulletView : TriggerView
 {
 	public void SetVelocity( Vector2 velocity )
 	{

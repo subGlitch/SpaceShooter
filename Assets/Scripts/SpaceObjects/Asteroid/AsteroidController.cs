@@ -11,7 +11,7 @@ public class AsteroidController : ADestroyable
 	{
 		_view		= view;
 
-		view.Collisions.Subscribe( _ => Destroy() );
+		view.TriggerEvents.Subscribe( _ => Destroy() );
 	}
 
 

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 
-public class AsteroidView : CollidableView
+public class AsteroidView : TriggerView
 {
 #pragma warning disable 0649
 
