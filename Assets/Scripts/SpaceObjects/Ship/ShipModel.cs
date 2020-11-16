@@ -28,5 +28,10 @@ public class ShipModel
 		if (Hull.Value <= 0)
 			OnDestroyed?.Invoke();
 	}
+
+	public void Fire()
+	{
+		Spawner.SpawnBullet( Position.Value );
+	}
 }
 

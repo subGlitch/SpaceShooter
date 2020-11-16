@@ -23,18 +23,17 @@ public class ShipController : ADestroyableController
 
 
 		// Init Player Controls
-		BindKeys();
+		BindDirKeys();
 		Observable
 			.EveryUpdate()
 			.Where( _ => Input.GetMouseButtonDown( 0 ))
-			.Subscribe( _ => LevelController.Instance.SpawnBullet() )
+			.Subscribe( _ => model.Fire() )
 			.AddTo( view );
 
 
 		// Bind View
-		view.Direction		= MergeKeys();
-		view.Speed			= model.Speed
-									.ToReadOnlyReactiveProperty();
+		view.Direction		= MergeDirKeys();
+		view.Speed			= model.Speed.ToReadOnlyReactiveProperty();
 
 		// Bind Model
 		{
@@ -55,7 +54,7 @@ public class ShipController : ADestroyableController
 		GameObject.Destroy( _view.gameObject );
 
 	
-	void BindKeys()
+	void BindDirKeys()
 	{
 		BindKey( _keyRight	);
 		BindKey( _keyLeft	);
@@ -64,7 +63,7 @@ public class ShipController : ADestroyableController
 	}
 
 
-	ReadOnlyReactiveProperty< Vector2Int > MergeKeys()
+	ReadOnlyReactiveProperty< Vector2Int > MergeDirKeys()
 	{
 		return
 			Observable

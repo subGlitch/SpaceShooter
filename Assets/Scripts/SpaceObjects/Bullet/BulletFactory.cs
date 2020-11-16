@@ -8,7 +8,7 @@ public class BulletFactory
     public BulletModel			Model;
 
 
-	public BulletFactory( Vector3 position )
+	public BulletFactory( Vector2 position )
 	{
 		View			= GameObject.Instantiate(
 													Refs.Instance.BulletViewPrefab,

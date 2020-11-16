@@ -23,8 +23,6 @@ public class LevelController : MB_Singleton< LevelController >
 	static int	_asteroidsOnScreen;
 
 
-	ShipModel		_ship;
-
 	IDisposable		_asteroidSpawner;
 	IDisposable		_timer;
 
@@ -136,20 +134,6 @@ public class LevelController : MB_Singleton< LevelController >
 
 		_asteroidSpawner	.Dispose();
 		_timer				.Dispose();
-
-		_ship		= null;
-	}
-
-
-	public void SpawnBullet()
-	{
-		BulletFactory factory			= new BulletFactory( _ship.Position.Value );
-		
-		// Set velocity
-		factory.Model.Fire( Vector2.right * Refs.Instance.Settings.BulletsSpeed );
-
-		// Bookkeeping
-		Bookkeeper.Register( factory.Controller );
 	}
 
 
@@ -158,14 +142,11 @@ public class LevelController : MB_Singleton< LevelController >
 		// Create
 		ShipFactory factory			= new ShipFactory( Refs.Instance.Settings.ShipSpeed );
 
-
 		// Bind
 		UiControllers.HudController.BindShipModel( factory.Model );
 		factory.Controller.OnDestroy		+= x => Transition( LevelState.Fail );
 
-
 		// Bookkeeping
-		_ship		= factory.Model;
 		Bookkeeper.Register( factory.Controller );
 	}
 
