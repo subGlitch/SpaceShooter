@@ -17,26 +17,33 @@ public class LevelController : MB_Singleton< LevelController >
 	const float AsteroidSpawnAreaExpand		= 1;
 	const float AsteroidSpawnRightShift		= 1;
 
+	const float AsteroidsSpawnRate			= .25f;
+
 #endregion
 
 
 	HashSet< ADestroyableController >	_spaceObjects		= new HashSet< ADestroyableController >();
 
-	ShipModel	_ship;
+	ShipModel		_ship;
+
+	IDisposable		_asteroidSpawner;
 
 
-	void Start()
+	// Test
+	void Update()
 	{
-		// Spawn asteroids forever ...
-	    Observable
-			.Interval( TimeSpan.FromSeconds( .25f ))
-			.Subscribe( _ => SpawnAsteroid() );
+		if (Input.GetKeyDown( KeyCode.Space ))
+			_asteroidSpawner.Dispose();
 	}
 
 
 	public void StartLevel()
 	{
 		SpawnShip();
+
+		_asteroidSpawner		= Observable
+									.Interval( TimeSpan.FromSeconds( AsteroidsSpawnRate ))
+									.Subscribe( _ => SpawnAsteroid() );
 	}
 
 
