@@ -140,14 +140,11 @@ public class LevelController : MB_Singleton< LevelController >
 	void SpawnShip()
 	{
 		// Create
-		ShipFactory factory			= new ShipFactory( Refs.Instance.Settings.ShipSpeed );
+		ShipFactory factory			= Spawner.SpawnShip();
 
 		// Bind
 		UiControllers.HudController.BindShipModel( factory.Model );
 		factory.Controller.OnDestroy		+= x => Transition( LevelState.Fail );
-
-		// Bookkeeping
-		Bookkeeper.Register( factory.Controller );
 	}
 
 
