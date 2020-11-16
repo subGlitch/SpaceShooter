@@ -50,11 +50,7 @@ public class LevelController : MB_Singleton< LevelController >
 	{
 		_asteroidsOnScreen		+= delta;
 
-		if (
-				_asteroidsOnScreen == 0 &&
-				_state == LevelState.TimeOut
-			)
-			Transition( LevelState.Win );
+		CheckConditions();
 	}
 
 
@@ -69,8 +65,7 @@ public class LevelController : MB_Singleton< LevelController >
 
 			case LevelState.TimeOut:
 				_asteroidSpawner.Dispose();
-				if (_asteroidsOnScreen == 0)
-					Transition( LevelState.Win );
+				CheckConditions();
 				break;
 
 			case LevelState.Fail:
@@ -79,6 +74,18 @@ public class LevelController : MB_Singleton< LevelController >
 
 			case LevelState.Win:
 				UiControllers.PopupPanelController.OpenPanel();
+				break;
+		}
+	}
+
+
+	void CheckConditions()
+	{
+		switch (_state)
+		{
+			case LevelState.TimeOut:
+				if (_asteroidsOnScreen == 0)
+					Transition( LevelState.Win );
 				break;
 		}
 	}
