@@ -13,11 +13,11 @@ public class LevelController : MB_Singleton< LevelController >
 
 	const float AsteroidBaseSpeed			= 5;
 	const float AsteroidAddonSpeed			= 4;
-
 	const float AsteroidSpawnAreaExpand		= 1;
 	const float AsteroidSpawnRightShift		= 1;
-
 	const float AsteroidsSpawnRate			= .25f;
+
+	const float BulletsSpeed				= 10;
 
 #endregion
 
@@ -74,7 +74,7 @@ public class LevelController : MB_Singleton< LevelController >
 		);
 	    BulletModel model				= new BulletModel();
 		BulletController controller		= new BulletController( model, view );
-		model.Fire( Vector2.right * 10 );
+		model.Fire( Vector2.right * BulletsSpeed );
 
 
 		// Bookkeeping
