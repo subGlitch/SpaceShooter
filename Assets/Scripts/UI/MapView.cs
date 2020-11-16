@@ -1,12 +1,16 @@
-﻿
+﻿using UniRx;
+
 
 public class MapView : UiViewBase
 {
+	public Subject< int > LevelPress		= new Subject< int >();
+
+
 	public void OnLevel( int levelIndex )
 	{
-		LevelController.Instance.StartLevel();
-		
 		SetActive( false );
+
+		LevelPress.OnNext( levelIndex );
 	}
 }
 

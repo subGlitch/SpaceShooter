@@ -1,18 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UniRx;
 
-public class MapController : MonoBehaviour
+
+public class MapController
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	public MapController( MapView view )
+	{
+		view.LevelPress
+			.Subscribe( _ => LevelController.Instance.StartLevel() );
+	}
 }
+
