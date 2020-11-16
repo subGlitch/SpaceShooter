@@ -19,6 +19,8 @@ public class LevelController : MB_Singleton< LevelController >
 {
 	public Subject< int >	LevelCompletedEvents		= new Subject< int >();
 
+	public ReactiveProperty< float >	TimerEndTime		= new ReactiveProperty< float >();
+
 
 	static int	_asteroidsOnScreen;
 
@@ -30,7 +32,50 @@ public class LevelController : MB_Singleton< LevelController >
 	int				_levelIndex;
 
 
-	public ReactiveProperty< float >	TimerEndTime		= new ReactiveProperty< float >();
+	public void StartLevel( int levelIndex )
+	{
+		_levelIndex					= levelIndex;
+		LevelConfig levelConfig		= Refs.Instance.Settings.Levels[ levelIndex ];
+		Random.InitState( levelConfig.Seed );
+
+
+		// Spawn Ship
+		SpawnShip();
+
+
+		// Init Asteroid spawning
+		_asteroidSpawner		= Observable
+									.Interval( TimeSpan.FromSeconds( Refs.Instance.Settings.AsteroidsSpawnRate ))
+									.Subscribe( _ => Spawner.SpawnAsteroid() );
+
+
+		// Init Level Timer
+		float time				= levelConfig.Time;
+		TimerEndTime.Value		= Time.time + time;
+		_timer					= Observable
+									.Timer( TimeSpan.FromSeconds( time ))
+									.Subscribe( _ => OnTimerOut() );
+
+
+		// Change State
+		Transition( LevelState.InProcess );
+	}
+
+
+	public void CloseLevel()
+	{
+		ClearLevel();
+		Transition( LevelState.None );
+	}
+
+
+	void ClearLevel()
+	{
+		Bookkeeper.Clear();
+
+		_asteroidSpawner	.Dispose();
+		_timer				.Dispose();
+	}
 
 
 	public void ChangeAsteroidsOnScreenCount( int delta )
@@ -40,6 +85,8 @@ public class LevelController : MB_Singleton< LevelController >
 		CheckConditions();
 	}
 
+
+#region Finite State Machine
 
 	void Transition( LevelState state )
 	{
@@ -88,52 +135,13 @@ public class LevelController : MB_Singleton< LevelController >
 		}
 	}
 
+#endregion	
+
 
 	void OnTimerOut()
 	{
 		_asteroidSpawner.Dispose();
 		Transition( LevelState.TimeOut );
-	}
-
-
-	public void StartLevel( int levelIndex )
-	{
-		_levelIndex					= levelIndex;
-		LevelConfig levelConfig		= Refs.Instance.Settings.Levels[ levelIndex ];
-
-		Random.InitState( levelConfig.Seed );
-
-		SpawnShip();
-
-		_asteroidSpawner		= Observable
-									.Interval( TimeSpan.FromSeconds( Refs.Instance.Settings.AsteroidsSpawnRate ))
-									.Subscribe( _ => SpawnAsteroid() );
-
-
-		float time				= levelConfig.Time;
-		TimerEndTime.Value		= Time.time + time;
-
-		_timer					= Observable
-									.Timer( TimeSpan.FromSeconds( time ))
-									.Subscribe( _ => OnTimerOut() );
-
-		Transition( LevelState.InProcess );
-	}
-
-
-	public void CloseLevel()
-	{
-		ClearLevel();
-		Transition( LevelState.None );
-	}
-
-
-	void ClearLevel()
-	{
-		Bookkeeper.Clear();
-
-		_asteroidSpawner	.Dispose();
-		_timer				.Dispose();
 	}
 
 
@@ -145,36 +153,6 @@ public class LevelController : MB_Singleton< LevelController >
 		// Bind
 		UiControllers.HudController.BindShipModel( factory.Model );
 		factory.Controller.OnDestroy		+= x => Transition( LevelState.Fail );
-	}
-
-
-	void SpawnAsteroid()
-	{
-		// Calc
-		Vector2 expandOffset		= Vector2.up * Boundaries.Rect.height * Refs.Instance.Settings.AsteroidSpawnAreaExpand * .5f;
-		Vector2 position			=
-										Vector2.Lerp(
-														Boundaries.x1y0	- expandOffset,
-														Boundaries.Max	+ expandOffset,
-														Random.value
-										) +
-										Vector2.right * Refs.Instance.Settings.AsteroidSpawnRightShift
-		;
-		Vector2 baseVelocity		= Vector2.left * Refs.Instance.Settings.AsteroidBaseSpeed;
-		Vector2 addonVelocity		= Random.insideUnitCircle * Refs.Instance.Settings.AsteroidAddonSpeed;
-		Vector2 velocity			= baseVelocity + addonVelocity;
-
-
-		// Create
-		AsteroidFactory factory		= new AsteroidFactory( position );
-
-
-		// Launch
-		factory.Model.Launch( velocity );
-
-
-		// Bookkeeping
-		Bookkeeper.Register( factory.Controller );
 	}
 }
 
