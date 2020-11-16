@@ -10,7 +10,7 @@ public class HudController
 	{
 		_view		= view;
 
-		LevelController.Instance.TimerEndTime.Subscribe( t => _view.SetTimerEndTime( t ) );
+		LevelController.TimerEndTime.Subscribe( t => _view.SetTimerEndTime( t ) );
 	}
 
 

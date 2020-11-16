@@ -11,16 +11,19 @@ public class AsteroidController : ADestroyableController
 	{
 		_view		= view;
 
+
 		// Bind Model
 		model.Velocity.Subscribe( v => _view.SetVelocity( v ) );
 
-		// Bind View
+		
+		// Bind View >>>
+
 		view.TriggerEnterEvents.Subscribe( col =>
 		{
 			switch (col.gameObject.layer)
 			{
 				case Layers.AsteroidsTriggers:
-					LevelController.Instance.ChangeAsteroidsOnScreenCount( 1 );
+					LevelController.ChangeAsteroidsOnScreenCount( 1 );
 					break;
 
 				default:
@@ -34,7 +37,7 @@ public class AsteroidController : ADestroyableController
 			switch (col.gameObject.layer)
 			{
 				case Layers.AsteroidsTriggers:
-					LevelController.Instance.ChangeAsteroidsOnScreenCount( -1 );
+					LevelController.ChangeAsteroidsOnScreenCount( -1 );
 					break;
 			}
 		});

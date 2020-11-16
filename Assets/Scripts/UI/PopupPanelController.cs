@@ -18,7 +18,7 @@ public class PopupPanelController
 		_view.Close();
 
 		Refs.Instance.MapView.SetActive( true );
-		LevelController.Instance.CloseLevel();
+		LevelController.CloseLevel();
 	}
 
 

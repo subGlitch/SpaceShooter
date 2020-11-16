@@ -15,24 +15,24 @@ public enum LevelState
 }
 
 
-public class LevelController : MB_Singleton< LevelController >
+public static class LevelController
 {
-	public Subject< int >	LevelCompletedEvents		= new Subject< int >();
+	public static Subject< int >	LevelCompletedEvents		= new Subject< int >();
 
-	public ReactiveProperty< float >	TimerEndTime		= new ReactiveProperty< float >();
+	public static ReactiveProperty< float >	TimerEndTime		= new ReactiveProperty< float >();
 
 
 	static int	_asteroidsOnScreen;
 
 
-	IDisposable		_asteroidSpawner;
-	IDisposable		_timer;
+	static IDisposable		_asteroidSpawner;
+	static IDisposable		_timer;
 
-	LevelState		_state;
-	int				_levelIndex;
+	static LevelState		_state;
+	static int				_levelIndex;
 
 
-	public void StartLevel( int levelIndex )
+	public static void StartLevel( int levelIndex )
 	{
 		_levelIndex					= levelIndex;
 		LevelConfig levelConfig		= Refs.Instance.Settings.Levels[ levelIndex ];
@@ -62,14 +62,14 @@ public class LevelController : MB_Singleton< LevelController >
 	}
 
 
-	public void CloseLevel()
+	public static void CloseLevel()
 	{
 		ClearLevel();
 		Transition( LevelState.None );
 	}
 
 
-	void ClearLevel()
+	static void ClearLevel()
 	{
 		Bookkeeper.Clear();
 
@@ -78,7 +78,7 @@ public class LevelController : MB_Singleton< LevelController >
 	}
 
 
-	public void ChangeAsteroidsOnScreenCount( int delta )
+	public static void ChangeAsteroidsOnScreenCount( int delta )
 	{
 		_asteroidsOnScreen		+= delta;
 
@@ -88,7 +88,7 @@ public class LevelController : MB_Singleton< LevelController >
 
 #region Finite State Machine
 
-	void Transition( LevelState state )
+	static void Transition( LevelState state )
 	{
 		if (
 				_state == LevelState.Fail &&
@@ -124,7 +124,7 @@ public class LevelController : MB_Singleton< LevelController >
 	}
 
 
-	void CheckConditions()
+	static void CheckConditions()
 	{
 		switch (_state)
 		{
@@ -138,14 +138,14 @@ public class LevelController : MB_Singleton< LevelController >
 #endregion	
 
 
-	void OnTimerOut()
+	static void OnTimerOut()
 	{
 		_asteroidSpawner.Dispose();
 		Transition( LevelState.TimeOut );
 	}
 
 
-	void SpawnShip()
+	static void SpawnShip()
 	{
 		// Create
 		ShipFactory factory			= Spawner.SpawnShip();

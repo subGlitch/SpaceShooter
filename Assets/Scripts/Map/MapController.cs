@@ -16,11 +16,11 @@ public class MapController
 		view.LocationSelect.Subscribe( levelIndex =>
 		{
 			view.SetActive( false );
-			LevelController.Instance.StartLevel( levelIndex );
+			LevelController.StartLevel( levelIndex );
 		});
 
 		// Subscribe to LevelCompleted events
-		LevelController.Instance.LevelCompletedEvents.Subscribe( model.OnLevelCompleted );
+		LevelController.LevelCompletedEvents.Subscribe( model.OnLevelCompleted );
 
 		// Refresh Map when MaxCompleted changes
 		model.MaxCompleted.Subscribe( _ => RefreshView() );

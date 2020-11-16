@@ -12,6 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfe07e13543a18f4db8e0715956eaf65, type: 3}
   m_Name: Settings
   m_EditorClassIdentifier: 
+  ShipSpeed: 5
+  AsteroidBaseSpeed: 5
+  AsteroidAddonSpeed: 4
+  AsteroidSpawnAreaExpand: 1
+  AsteroidSpawnRightShift: 1
+  AsteroidsSpawnRate: 0.25
+  BulletsSpeed: 10
   Levels:
   - Time: 10
     AsteroidsRate: 0.25
