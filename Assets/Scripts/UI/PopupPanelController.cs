@@ -17,17 +17,12 @@ public class PopupPanelController
 	{
 		LevelController.Instance.RestartLevel();
 
-		PanelSetActive( false );
+		_view.Close();
 	}
 
 
-	public void OpenPanel()
+	public void OpenPanel( bool isWin )
 	=>
-		PanelSetActive( true );
-
-
-	void PanelSetActive( bool active )
-	=>
-		_view.gameObject.SetActive( active );
+		_view.Open( isWin );
 }
 

@@ -74,11 +74,11 @@ public class LevelController : MB_Singleton< LevelController >
 				break;
 
 			case LevelState.Fail:
-				UiControllers.PopupPanelController.OpenPanel();
+				UiControllers.PopupPanelController.OpenPanel( false );
 				break;
 
 			case LevelState.Win:
-				UiControllers.PopupPanelController.OpenPanel();
+				UiControllers.PopupPanelController.OpenPanel( true );
 				break;
 		}
 	}
