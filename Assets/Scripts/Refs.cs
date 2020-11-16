@@ -3,6 +3,9 @@
 
 public class Refs : MB_Singleton< Refs >
 {
+	[Header( "Game Settings" )]
+	public Settings			Settings;
+
 	[Header( "Prefabs" )]
 	public ShipView			ShipViewPrefab;
 	public AsteroidView		AsteroidViewPrefab;

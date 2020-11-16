@@ -1803,6 +1803,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67d23e3c0d2389645889daa3838fa83f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Settings: {fileID: 11400000, guid: 033feb28e2c5da440813bc4bda156bea, type: 2}
   ShipViewPrefab: {fileID: 8686754851377550607, guid: 0c741527fcfeb854b99c8945b9951bb9, type: 3}
   AsteroidViewPrefab: {fileID: 3028080609780267148, guid: f0d517bbdaf1e2c4f97f4badb254d149, type: 3}
   BulletViewPrefab: {fileID: 9086955876616141624, guid: 22a77cead976a5141b42d727a2f6722d, type: 3}

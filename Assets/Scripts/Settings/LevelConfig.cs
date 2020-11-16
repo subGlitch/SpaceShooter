@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 
-[CreateAssetMenu( fileName = "LevelConfig", menuName = "ScriptableObjects/LevelConfig" )]
-public class LevelConfig : ScriptableObject
+[Serializable]
+public struct LevelConfig
 {
 	public float	Time;
 	public float	AsteroidsRate;

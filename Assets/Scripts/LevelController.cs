@@ -115,7 +115,7 @@ public class LevelController : MB_Singleton< LevelController >
 
 	public void StartLevel( int levelIndex )
 	{
-		LevelConfig levelConfig		= new LevelConfig();
+		LevelConfig levelConfig		= Refs.Instance.Settings.Levels[ levelIndex ];
 
 		Random.InitState( levelConfig.Seed );
 
@@ -126,7 +126,7 @@ public class LevelController : MB_Singleton< LevelController >
 									.Subscribe( _ => SpawnAsteroid() );
 
 
-		float time				= LevelTime;
+		float time				= levelConfig.Time;
 		TimerEndTime.Value		= Time.time + time;
 
 		_timer					= Observable
