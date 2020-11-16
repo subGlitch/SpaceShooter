@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 
 
-public class HudView : MonoBehaviour
+public class HudView : UiViewBase
 {
 #pragma warning disable 0649
 

@@ -12,12 +12,12 @@ public class PopupPanelView : MonoBehaviour
 #pragma warning restore 0649
 
 
-	public event Action		OnRestart;
+	public event Action		OnMap;
 
 
 	public void Restart()
 	=>
-		OnRestart?.Invoke();
+		OnMap?.Invoke();
 
 
 	public void Open( bool isWin )

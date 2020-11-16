@@ -19,5 +19,11 @@ public class HudController
 		shipModel.Hull
 			.Subscribe( x => _view.SetHull( x ) );
 	}
+
+
+	public void SetActive( bool isActive )
+	{
+		_view.SetActive( isActive );
+	}
 }
 

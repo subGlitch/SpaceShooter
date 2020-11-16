@@ -8,6 +8,8 @@ public class GameController : MonoBehaviour
 		TechSettings();
 
 		UiControllers.Init();
+
+		Refs.Instance.MapView.SetActive( true );
 	}
 
 

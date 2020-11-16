@@ -61,15 +61,21 @@ public class LevelController : MB_Singleton< LevelController >
 
 	void Transition( LevelState state )
 	{
+		if (
+				_state == LevelState.Fail &&
+				state == LevelState.TimeOut
+			)
+			return;
+
 		_state		= state;
 
 		switch (state)
 		{
 			case LevelState.InProcess:
+				UiControllers.HudController.SetActive( true );
 				break;
 
 			case LevelState.TimeOut:
-				_asteroidSpawner.Dispose();
 				CheckConditions();
 				break;
 
@@ -96,6 +102,13 @@ public class LevelController : MB_Singleton< LevelController >
 	}
 
 
+	void OnTimerOut()
+	{
+		_asteroidSpawner.Dispose();
+		Transition( LevelState.TimeOut );
+	}
+
+
 	public void StartLevel()
 	{
 		SpawnShip();
@@ -110,7 +123,7 @@ public class LevelController : MB_Singleton< LevelController >
 
 		_timer					= Observable
 									.Timer( TimeSpan.FromSeconds( time ))
-									.Subscribe( _ => Transition( LevelState.TimeOut ) );
+									.Subscribe( _ => OnTimerOut() );
 
 		Transition( LevelState.InProcess );
 	}

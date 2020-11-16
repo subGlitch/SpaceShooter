@@ -9,7 +9,7 @@ public class PopupPanelController
 	{
 		_view		= view;
 
-		view.OnRestart		+= RestartLevel;
+		view.OnMap		+= ToMap;
 	}
 
 
@@ -18,6 +18,14 @@ public class PopupPanelController
 		LevelController.Instance.RestartLevel();
 
 		_view.Close();
+	}
+
+
+	public void ToMap()
+	{
+		_view.Close();
+
+		Refs.Instance.MapView.SetActive( true );
 	}
 
 

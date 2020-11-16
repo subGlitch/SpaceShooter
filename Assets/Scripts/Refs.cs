@@ -13,6 +13,7 @@ public class Refs : MB_Singleton< Refs >
 	public Transform		Gameplay;
 
 	[Header( "UI Refs" )]
+	public MapView			MapView;
 	public HudView			HudView;
 	public PopupPanelView	PopupPanelView;
 }
