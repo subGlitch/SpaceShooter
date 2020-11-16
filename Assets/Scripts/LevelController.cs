@@ -49,10 +49,13 @@ public class LevelController : MB_Singleton< LevelController >
 
 	void ClearLevel()
 	{
-		foreach (ADestroyableController asteroid in _spaceObjects)
-			asteroid.DestroySilently();
-
+		foreach (ADestroyableController spaceObject in _spaceObjects)
+			spaceObject.DestroySilently();
 		_spaceObjects.Clear();
+
+		_asteroidSpawner.Dispose();
+
+		_ship		= null;
 	}
 
 
