@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class AsteroidController : ADestroyableController
 {
+	static int	_onScreenCounter;
+
+
 	AsteroidView	_view;
 
 
@@ -15,7 +18,19 @@ public class AsteroidController : ADestroyableController
 		model.Velocity.Subscribe( v => _view.SetVelocity( v ) );
 
 		// Bind View
-		view.TriggerEvents.Subscribe( _ => Destroy() );
+		view.TriggerEvents.Subscribe( col =>
+		{
+			switch (col.gameObject.layer)
+			{
+				case Layers.AsteroidsTriggers:
+					Debug.Log( $"_onScreenCounter: { ++ _onScreenCounter }");
+					break;
+
+				default:
+					Destroy();
+					break;
+			}
+		});
 	}
 
 

@@ -20,6 +20,12 @@ public class Boundaries : MonoBehaviour
 		CreateEdgeCollider( Min, x1y0 );		// Bottom
 		CreateEdgeCollider( Min, x0y1 );		// Left
 		CreateEdgeCollider( x1y0, Max );		// Right
+
+		BoxCollider2D box			= new GameObject( "Box collider" ).AddComponent< BoxCollider2D >();
+		box.gameObject.layer		= Layers.AsteroidsTriggers;
+		box.transform.SetParent( transform );
+		box.size					= Rect.size;
+		box.isTrigger				= true;
 	}
 
 
