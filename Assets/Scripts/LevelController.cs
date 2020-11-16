@@ -17,21 +17,6 @@ public enum LevelState
 
 public class LevelController : MB_Singleton< LevelController >
 {
-#region Settings
-
-	const float ShipSpeed					= 5;
-
-	const float AsteroidBaseSpeed			= 5;
-	const float AsteroidAddonSpeed			= 4;
-	const float AsteroidSpawnAreaExpand		= 1;
-	const float AsteroidSpawnRightShift		= 1;
-	const float AsteroidsSpawnRate			= .25f;
-
-	const float BulletsSpeed				= 10;
-
-#endregion
-
-
 	public Subject< int >	LevelCompletedEvents		= new Subject< int >();
 
 
@@ -123,7 +108,7 @@ public class LevelController : MB_Singleton< LevelController >
 		SpawnShip();
 
 		_asteroidSpawner		= Observable
-									.Interval( TimeSpan.FromSeconds( AsteroidsSpawnRate ))
+									.Interval( TimeSpan.FromSeconds( Refs.Instance.Settings.AsteroidsSpawnRate ))
 									.Subscribe( _ => SpawnAsteroid() );
 
 
@@ -161,7 +146,7 @@ public class LevelController : MB_Singleton< LevelController >
 		BulletFactory factory			= new BulletFactory( _ship.Position.Value );
 		
 		// Set velocity
-		factory.Model.Fire( Vector2.right * BulletsSpeed );
+		factory.Model.Fire( Vector2.right * Refs.Instance.Settings.BulletsSpeed );
 
 		// Bookkeeping
 		Bookkeeper.Register( factory.Controller );
@@ -171,7 +156,7 @@ public class LevelController : MB_Singleton< LevelController >
 	void SpawnShip()
 	{
 		// Create
-		ShipFactory factory			= new ShipFactory( ShipSpeed );
+		ShipFactory factory			= new ShipFactory( Refs.Instance.Settings.ShipSpeed );
 
 
 		// Bind
@@ -188,17 +173,17 @@ public class LevelController : MB_Singleton< LevelController >
 	void SpawnAsteroid()
 	{
 		// Calc
-		Vector2 expandOffset		= Vector2.up * Boundaries.Rect.height * AsteroidSpawnAreaExpand * .5f;
+		Vector2 expandOffset		= Vector2.up * Boundaries.Rect.height * Refs.Instance.Settings.AsteroidSpawnAreaExpand * .5f;
 		Vector2 position			=
 										Vector2.Lerp(
 														Boundaries.x1y0	- expandOffset,
 														Boundaries.Max	+ expandOffset,
 														Random.value
 										) +
-										Vector2.right * AsteroidSpawnRightShift
+										Vector2.right * Refs.Instance.Settings.AsteroidSpawnRightShift
 		;
-		Vector2 baseVelocity		= Vector2.left * AsteroidBaseSpeed;
-		Vector2 addonVelocity		= Random.insideUnitCircle * AsteroidAddonSpeed;
+		Vector2 baseVelocity		= Vector2.left * Refs.Instance.Settings.AsteroidBaseSpeed;
+		Vector2 addonVelocity		= Random.insideUnitCircle * Refs.Instance.Settings.AsteroidAddonSpeed;
 		Vector2 velocity			= baseVelocity + addonVelocity;
 
 
