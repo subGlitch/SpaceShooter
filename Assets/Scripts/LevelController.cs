@@ -20,7 +20,7 @@ public class LevelController : MB_Singleton< LevelController >
 #endregion
 
 
-	HashSet< ADestroyable >	_spaceObjects		= new HashSet< ADestroyable >();
+	HashSet< ADestroyableController >	_spaceObjects		= new HashSet< ADestroyableController >();
 
 	ShipModel	_ship;
 
@@ -42,7 +42,7 @@ public class LevelController : MB_Singleton< LevelController >
 
 	void ClearLevel()
 	{
-		foreach (ADestroyable asteroid in _spaceObjects)
+		foreach (ADestroyableController asteroid in _spaceObjects)
 			asteroid.DestroySilently();
 
 		_spaceObjects.Clear();
@@ -135,7 +135,7 @@ public class LevelController : MB_Singleton< LevelController >
 	}
 
 
-	void Register( ADestroyable controller )
+	void Register( ADestroyableController controller )
 	{
 		_spaceObjects.Add( controller );
 

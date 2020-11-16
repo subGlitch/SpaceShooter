@@ -2,7 +2,7 @@
 using UnityEngine;
 
 
-public class ShipController : ADestroyable
+public class ShipController : ADestroyableController
 {
 #region Keyboard Controls
 

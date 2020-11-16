@@ -2,7 +2,7 @@
 using UnityEngine;
 
 
-public class AsteroidController : ADestroyable
+public class AsteroidController : ADestroyableController
 {
 	AsteroidView	_view;
 

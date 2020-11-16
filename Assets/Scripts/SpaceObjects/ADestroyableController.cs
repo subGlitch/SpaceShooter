@@ -1,8 +1,8 @@
 ﻿
 
-public abstract class ADestroyable
+public abstract class ADestroyableController
 {
-	public delegate void DestroyableEvent( ADestroyable destroyable );
+	public delegate void DestroyableEvent( ADestroyableController destroyableController );
 	public event DestroyableEvent	OnDestroy;
 
 

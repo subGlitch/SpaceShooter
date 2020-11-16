@@ -2,7 +2,7 @@
 using UnityEngine;
 
 
-public class BulletController : ADestroyable
+public class BulletController : ADestroyableController
 {
 	BulletView	_view;
 
