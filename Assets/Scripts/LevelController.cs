@@ -71,6 +71,10 @@ public class LevelController : MB_Singleton< LevelController >
 
 		switch (state)
 		{
+			case LevelState.None:
+				UiControllers.HudController.SetActive( false );
+				break;
+
 			case LevelState.InProcess:
 				UiControllers.HudController.SetActive( true );
 				break;
@@ -129,6 +133,13 @@ public class LevelController : MB_Singleton< LevelController >
 	}
 
 
+	public void CloseLevel()
+	{
+		ClearLevel();
+		Transition( LevelState.None );
+	}
+
+
 	void ClearLevel()
 	{
 		foreach (ADestroyableController spaceObject in _spaceObjects)
@@ -139,13 +150,6 @@ public class LevelController : MB_Singleton< LevelController >
 		_timer				.Dispose();
 
 		_ship		= null;
-	}
-
-
-	public void RestartLevel()
-	{
-		ClearLevel();
-		StartLevel();
 	}
 
 

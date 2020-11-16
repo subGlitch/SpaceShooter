@@ -15,8 +15,8 @@ public static class UiControllers
 		PopupPanelController		= new PopupPanelController( Refs.Instance.PopupPanelView );
 
 		// Special Keys
-		BindKey( KeyCode.Escape,	Application.Quit					);			// [Escape]		- Quit
-		BindKey( KeyCode.R,			PopupPanelController.RestartLevel	);			// [R]			- Restart Level
+		BindKey( KeyCode.Escape, Application.Quit );		// [Escape] - Quit
+
 	}
 
 

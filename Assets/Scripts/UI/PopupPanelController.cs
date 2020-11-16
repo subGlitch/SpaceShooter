@@ -13,19 +13,12 @@ public class PopupPanelController
 	}
 
 
-	public void RestartLevel()
-	{
-		LevelController.Instance.RestartLevel();
-
-		_view.Close();
-	}
-
-
 	public void ToMap()
 	{
 		_view.Close();
 
 		Refs.Instance.MapView.SetActive( true );
+		LevelController.Instance.CloseLevel();
 	}
 
 
