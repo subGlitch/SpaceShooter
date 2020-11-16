@@ -1014,7 +1014,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c26c6c53930993647841b97cdc94e3cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _locations:
+  Locations:
   - {fileID: 2134429203}
   - {fileID: 617821850}
   - {fileID: 346984997}

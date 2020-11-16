@@ -10,9 +10,9 @@ public static class UiControllers
 	public static PopupPanelController		PopupPanelController;
 
 
-	public static void Init()
+	public static void Init( MapModel mapModel )
 	{
-		MapController				= new MapController( Refs.Instance.MapView );
+		MapController				= new MapController( mapModel, Refs.Instance.MapView );
 		HudController				= new HudController( Refs.Instance.HudView );
 		PopupPanelController		= new PopupPanelController( Refs.Instance.PopupPanelView );
 

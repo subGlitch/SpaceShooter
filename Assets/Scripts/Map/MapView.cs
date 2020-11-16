@@ -1,16 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using UniRx;
-using UnityEngine;
 
 
 public class MapView : UiViewBase
 {
-#pragma warning disable 0649
-
-	[SerializeField] List< MapLocationView >	_locations;
-
-#pragma warning restore 0649
+	public List< MapLocationView >	Locations;
 
 
 	public IObservable< int > LocationSelect;
@@ -20,9 +15,9 @@ public class MapView : UiViewBase
 	{
 		LocationSelect			= Observable.Empty< int >();
 
-		for (int i = 0; i < _locations.Count; i ++)
+		for (int i = 0; i < Locations.Count; i ++)
 		{
-			var location		= _locations[ i ];
+			var location		= Locations[ i ];
 
 			location.SetLevelNum( i + 1 );
 
@@ -31,6 +26,13 @@ public class MapView : UiViewBase
 													LocationSelect,
 													location.PressEvents.Select( _ => copy )
 			);
+
+			MapLocationState state		=
+											i <= 1 ? MapLocationState.Completed :
+											i == 2 ? MapLocationState.Available :
+											MapLocationState.Locked
+			;
+			location.SetState( state );
 		}
 	}
 }

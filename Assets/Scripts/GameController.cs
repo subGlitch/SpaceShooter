@@ -9,7 +9,9 @@ public class GameController : MonoBehaviour
 		TechSettings();
 		GenerateRandomParameters();
 
-		UiControllers.Init();
+		MapModel mapModel		= new MapModel();
+
+		UiControllers.Init( mapModel );
 
 		Refs.Instance.MapView.SetActive( true );
 	}
