@@ -65,20 +65,13 @@ public class LevelController : MB_Singleton< LevelController >
 
 	public void SpawnBullet()
 	{
-		// Create
-		BulletView view					= Instantiate(
-														Refs.Instance.BulletViewPrefab,
-														_ship.Position.Value,
-														Quaternion.identity,
-														Refs.Instance.Gameplay
-		);
-	    BulletModel model				= new BulletModel();
-		BulletController controller		= new BulletController( model, view );
-		model.Fire( Vector2.right * BulletsSpeed );
-
+		BulletFactory factory			= new BulletFactory( _ship );
+		
+		// Set velocity
+		factory.Model.Fire( Vector2.right * BulletsSpeed );
 
 		// Bookkeeping
-		Register( controller );
+		Register( factory.Controller );
 	}
 
 
