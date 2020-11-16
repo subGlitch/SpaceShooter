@@ -41,7 +41,7 @@ public class ShipController : ADestroyableController
 											.Select( _ => view.Position )
 											.ToReadOnlyReactiveProperty();
 
-			view.TriggerEvents
+			view.TriggerEnterEvents
 					.Subscribe( _ => model.TakeDamage() );
 
 			model.OnDestroyed		+= Destroy;

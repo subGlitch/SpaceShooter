@@ -15,7 +15,7 @@ public class BulletController : ADestroyableController
 		model.Velocity.Subscribe( v => _view.SetVelocity( v ) );
 
 		// Bind View
-		view.TriggerEvents.Subscribe( _ => Destroy() );
+		view.TriggerEnterEvents.Subscribe( _ => Destroy() );
 	}
 
 

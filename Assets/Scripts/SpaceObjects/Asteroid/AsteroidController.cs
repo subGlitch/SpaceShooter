@@ -18,7 +18,7 @@ public class AsteroidController : ADestroyableController
 		model.Velocity.Subscribe( v => _view.SetVelocity( v ) );
 
 		// Bind View
-		view.TriggerEvents.Subscribe( col =>
+		view.TriggerEnterEvents.Subscribe( col =>
 		{
 			switch (col.gameObject.layer)
 			{

@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class TriggerView : MonoBehaviour
 {
-	public System.IObservable< Collider2D >		TriggerEvents;
+	public System.IObservable< Collider2D >		TriggerEnterEvents;
 
 
 	void Awake()
 	{
-		TriggerEvents		= gameObject.OnTriggerEnter2DAsObservable();
+		TriggerEnterEvents		= gameObject.OnTriggerEnter2DAsObservable();
 	}
 }
 

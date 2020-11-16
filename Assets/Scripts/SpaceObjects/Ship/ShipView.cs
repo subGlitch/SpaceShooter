@@ -16,8 +16,8 @@ public class ShipView : MonoBehaviour
 	public ReadOnlyReactiveProperty< float >		Speed;
 
 
-	public Vector2								Position			=> transform.position;
-	public System.IObservable< Collider2D >		TriggerEvents		=> _triggerView.TriggerEvents;
+	public Vector2								Position				=> transform.position;
+	public System.IObservable< Collider2D >		TriggerEnterEvents		=> _triggerView.TriggerEnterEvents;
 
 
 
