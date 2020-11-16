@@ -136,7 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rb: {fileID: 8686754851377550606}
-  _trigger: {fileID: 8686754851947655791}
+  _triggerView: {fileID: 8686754851947655791}
 --- !u!1 &8686754851947655777
 GameObject:
   m_ObjectHideFlags: 0

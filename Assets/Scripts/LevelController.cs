@@ -127,7 +127,7 @@ public class LevelController : MB_Singleton< LevelController >
 
 
 		// Launch
-		view.Init( velocity );
+		view.SetVelocity( velocity );
 
 
 		// Bookkeeping
