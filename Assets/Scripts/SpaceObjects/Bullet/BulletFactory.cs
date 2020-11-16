@@ -4,15 +4,15 @@
 public class BulletFactory
 {
 	public BulletView			View;
-    public BulletModel			Model;
 	public BulletController		Controller;
+    public BulletModel			Model;
 
 
-	public BulletFactory( ShipModel ship )
+	public BulletFactory( Vector3 position )
 	{
 		View			= GameObject.Instantiate(
 													Refs.Instance.BulletViewPrefab,
-													ship.Position.Value,
+													position,
 													Quaternion.identity,
 													Refs.Instance.Gameplay
 		);

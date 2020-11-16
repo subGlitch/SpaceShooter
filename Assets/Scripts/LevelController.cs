@@ -65,7 +65,7 @@ public class LevelController : MB_Singleton< LevelController >
 
 	public void SpawnBullet()
 	{
-		BulletFactory factory			= new BulletFactory( _ship );
+		BulletFactory factory			= new BulletFactory( _ship.Position.Value );
 		
 		// Set velocity
 		factory.Model.Fire( Vector2.right * BulletsSpeed );
@@ -117,22 +117,15 @@ public class LevelController : MB_Singleton< LevelController >
 
 
 		// Create
-		AsteroidView view			= Instantiate(
-													Refs.Instance.AsteroidViewPrefab,
-													position,
-													Quaternion.identity,
-													Refs.Instance.Gameplay
-		);
-		AsteroidModel model					= new AsteroidModel();
-		AsteroidController controller		= new AsteroidController( model, view );
+		AsteroidFactory factory		= new AsteroidFactory( position );
 
 
 		// Launch
-		model.Launch( velocity );
+		factory.Model.Launch( velocity );
 
 
 		// Bookkeeping
-		Register( controller );
+		Register( factory.Controller );
 	}
 
 
