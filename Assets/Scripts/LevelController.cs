@@ -66,7 +66,8 @@ public class LevelController : MB_Singleton< LevelController >
 														Refs.Instance.Gameplay
 		);
 	    BulletModel model				= new BulletModel();
-		BulletController controller		= new BulletController( view );
+		BulletController controller		= new BulletController( model, view );
+		model.Fire( Vector2.right * 10 );
 
 
 		// Bookkeeping
