@@ -113,8 +113,12 @@ public class LevelController : MB_Singleton< LevelController >
 	}
 
 
-	public void StartLevel()
+	public void StartLevel( int levelIndex )
 	{
+		LevelConfig levelConfig		= new LevelConfig();
+
+		Random.InitState( levelConfig.Seed );
+
 		SpawnShip();
 
 		_asteroidSpawner		= Observable
