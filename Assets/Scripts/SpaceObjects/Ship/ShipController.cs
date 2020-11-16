@@ -27,7 +27,8 @@ public class ShipController : ADestroyableController
 		Observable
 			.EveryUpdate()
 			.Where( _ => Input.GetMouseButtonDown( 0 ))
-			.Subscribe( _ => LevelController.Instance.SpawnBullet() );
+			.Subscribe( _ => LevelController.Instance.SpawnBullet() )
+			.AddTo( view );
 
 
 		// Bind View
