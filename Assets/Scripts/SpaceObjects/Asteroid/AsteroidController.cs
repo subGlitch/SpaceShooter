@@ -7,10 +7,14 @@ public class AsteroidController : ADestroyableController
 	AsteroidView	_view;
 
 
-	public AsteroidController( AsteroidView view )
+	public AsteroidController( AsteroidModel model, AsteroidView view )
 	{
 		_view		= view;
 
+		// Bind Model
+		model.Velocity.Subscribe( v => _view.SetVelocity( v ) );
+
+		// Bind View
 		view.TriggerEvents.Subscribe( _ => Destroy() );
 	}
 

@@ -123,11 +123,12 @@ public class LevelController : MB_Singleton< LevelController >
 													Quaternion.identity,
 													Refs.Instance.Gameplay
 		);
-		AsteroidController controller		= new AsteroidController( view );
+		AsteroidModel model					= new AsteroidModel();
+		AsteroidController controller		= new AsteroidController( model, view );
 
 
 		// Launch
-		view.SetVelocity( velocity );
+		model.Launch( velocity );
 
 
 		// Bookkeeping
