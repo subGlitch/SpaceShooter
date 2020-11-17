@@ -14,6 +14,8 @@ public class ShipController : ADestroyableController
 #endregion
 
 
+	CompositeDisposable	_disposables		= new CompositeDisposable();
+
 	ShipView	_view;
 
 
@@ -28,7 +30,7 @@ public class ShipController : ADestroyableController
 			.EveryUpdate()
 			.Where( _ => Input.GetMouseButtonDown( 0 ) && !Utils.IsPointerOverGameObject() )
 			.Subscribe( _ => model.Fire() )
-			.AddTo( view );
+			.AddTo( _disposables );
 
 
 		// Bind View
@@ -50,8 +52,10 @@ public class ShipController : ADestroyableController
 
 
 	public override void DestroySilently()
-	=>
+	{
 		GameObject.Destroy( _view.gameObject );
+		_disposables.Clear();
+	}
 
 	
 	void BindDirKeys()
