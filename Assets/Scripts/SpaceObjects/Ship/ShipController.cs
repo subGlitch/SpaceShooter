@@ -26,7 +26,7 @@ public class ShipController : ADestroyableController
 		BindDirKeys();
 		Observable
 			.EveryUpdate()
-			.Where( _ => Input.GetMouseButtonDown( 0 ))
+			.Where( _ => Input.GetMouseButtonDown( 0 ) && !Utils.IsPointerOverGameObject() )
 			.Subscribe( _ => model.Fire() )
 			.AddTo( view );
 

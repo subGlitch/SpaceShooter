@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 
 public static class Utils
@@ -20,6 +21,30 @@ public static class Utils
 		}
 
 		return new Rect( min, max - min );
+	}
+
+
+	public static bool IsPointerOverGameObject()
+	{
+		// http://answers.unity.com/answers/1643456/view.html
+
+		// Check mouse
+		if (EventSystem.current.IsPointerOverGameObject())
+			return true;
+     
+		// Check touches
+		for (int i = 0; i < Input.touchCount; i ++)
+		{
+			Touch touch		= Input.GetTouch(i);
+
+			if(
+					touch.phase == TouchPhase.Began &&
+					EventSystem.current.IsPointerOverGameObject( touch.fingerId )
+				)
+				return true;
+		}
+                 
+		return false;
 	}
 
 
