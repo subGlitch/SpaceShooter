@@ -24,14 +24,14 @@ MonoBehaviour:
     AsteroidsRate: 0.25
     Seed: 1543501226
   - Time: 15
-    AsteroidsRate: 0.2
+    AsteroidsRate: 0.19375
     Seed: 199432970
   - Time: 20
-    AsteroidsRate: 0.15
+    AsteroidsRate: 0.1375
     Seed: 752298618
   - Time: 25
-    AsteroidsRate: 0.1
+    AsteroidsRate: 0.08125
     Seed: 138080314
   - Time: 30
-    AsteroidsRate: 0.05
+    AsteroidsRate: 0.025
     Seed: 743183922

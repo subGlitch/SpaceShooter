@@ -74,9 +74,19 @@ public class GameController : MonoBehaviour
 
 		Settings settings		= Refs.Instance.Settings;
 
-		foreach (LevelConfig levelConfig in settings.Levels)
+		for (int i = 0; i < settings.Levels.Count; i ++)
 		{
-			levelConfig.Seed	= Random.Range( int.MinValue, int.MaxValue );
+			LevelConfig levelConfig			= settings.Levels[ i ];
+
+			levelConfig.Seed				= Random.Range( int.MinValue, int.MaxValue );		// This is the main part
+
+			/*
+			levelConfig.AsteroidsRate		= Random.Range( .5f, .25f );
+			levelConfig.Time				= Random.Range( 10f, 30f );
+			*/
+			float t							= i / (settings.Levels.Count - 1f);
+			levelConfig.AsteroidsRate		= Mathf.Lerp( .25f, .025f, t );
+			levelConfig.Time				= Mathf.Lerp( 10, 30, t );
 		}
 
 		#if UNITY_EDITOR
