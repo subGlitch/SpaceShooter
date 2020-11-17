@@ -33,7 +33,34 @@ public class GameController : MonoBehaviour
 	}
 
 
-	void OnApplicationQuit()		=> SaveGame();
+	void OnApplicationQuit()
+	{
+		SaveGame();	
+	}
+
+	/*
+    void OnApplicationFocus( bool hasFocus )
+	{
+		if (
+				!hasFocus &&
+				Time.frameCount > 0				// Strange cases on some devices
+			)
+		{
+			SaveGame();	
+		}
+	}
+	*/
+
+	void OnApplicationPause( bool pauseStatus )
+	{
+		if (
+				pauseStatus &&
+				Time.frameCount > 0				// Strange cases on some devices
+			)
+		{
+			SaveGame();	
+		}
+	}
 
 
 	void CreateNewGame()		=> _mapModel		= new MapModel();
